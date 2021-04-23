@@ -4,7 +4,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 [TOC]
 ## Nomenclature
 | Terms | Explanations |
-| :-- |: -- |
+| -- |-- |
 |**AM** | Acoustic Model. Note that: we also list the end-to-end (**e2e**) models (e.g., Attention based Seq2Seq, RNN-T) in this field, although these e2e models contains an implicit/internal LM through the encoder. |
 |**AM size (M)** | The number of parameters in millions in the Acoustic Model. Also we report the total number of parameters in the e2e models in this field. |
 |**Unit**| phone (namely monophone), biphone, triphone, **wp** (word-piece), character |
@@ -23,31 +23,52 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 
 This dataset contains about **80 hours** of training data, consisting of read sentences from the Wall Street Journal, recorded under clean conditions. Available from the LDC as WSJ0 under the catalog number [LDC93S6B](https://catalog.ldc.upenn.edu/LDC93S6B).
 
-The evaluation dataset contains the simpler eval92 subset and the harder dev93 subset. For the sake of display, the better for eval92, the earlier in the following Table.
+The evaluation dataset contains the simpler eval92 subset and the harder dev93 subset.
+
+Results are sorted by `eval92` WER.
 
 | eval92 WER | dev93 WER | AM | AM size (M) | Unit | LM | LM size (M) |Data Aug. | Ext. Data | Paper |
-| :--------- | :-------- | :- | :- | :------- | :----------- | :--- | ---- | ---- | ---- |
-| 3.79 | 6.23 | BLSTM |13| mono-phone | 4-gram |?| SP |--- | [CTC-CRF](#ctc-crf) ICASSP2019 |
-| 3.2 | 5.7 | VGG BLSTM |16| mono-phone | 4-gram |?| SP |--- | [CAT](#cat) IS2020 |
-| 2.77 | 5.68 | TDNN NAS |11.9| mono-phone | 4-gram |?| SP |--- | NAS SLT2021|
-| 2.7 | 5.3 |  || bi-phone | 4-gram ||  | | LF-MMI ASLP18 |
-| 3.0 | 6.0 |  || bi-phone | 4-gram ||  | | EE-LF-MMI ASLP18 |
-|  |  |  ||  |  ||  | |  |
+| --------- | -------- | - | - | ------- | ----------- | --- | ---- | ---- | ---- |
+| 2.7 | 5.3 | TDNN-LSTM | ? | bi-phone | 4-gram | ? |SP | --- | [LF-MMI](#lf-mmi) TASLP2018 |
+| 2.77       | 5.68      | TDNN NAS  | 11.9        | mono-phone | 4-gram                                      | 0.18        | SP        | ---       | [NAS](#st-nas) SLT2021         |
+| 3.0        | 6.0       | TDNN-LSTM | ?           | bi-phone   | 4-gram                                      | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
+| 3.2        | 5.7       | VGG BLSTM | 16          | mono-phone | 4-gram                                      | 0.18        | SP        | ---       | [CAT](#cat) IS2020             |
+| 3.4        | 5.9       | LSTM      | ?           | sub-word   | CNN-LSTM encoder and LSTM/attention decoder | ?           | ---       | ---       | [ESPRESSO](#espresso) ASRU2019 |
+| 3.79       | 6.23      | BLSTM     | 13.5        | mono-phone | 4-gram                                      | 0.18        | SP        | ---       | [CTC-CRF](#ctc-crf) ICASSP2019 |
 
 ## Swbd
 
-This dataset contains about **260 hours** of English telephone conversations between two strangers on a preassigned topic. The testing is commonly conducted on eval2000 (a.k.a. hub5'00 evaluation), which consists of two test subsets - Switchboard (SW) and CallHome (CH). Results in square brackets denote the weighted average over SW and CH based on our calculation when not reported in the original paper. 
+This dataset contains about **260 hours** of English telephone conversations between two strangers on a preassigned topic ([LDC97S62](https://catalog.ldc.upenn.edu/LDC97S62)). The testing is commonly conducted on eval2000 (a.k.a. hub5'00 evaluation, [LDC2002S09](https://catalog.ldc.upenn.edu/LDC2002S09) for speech data and [LDC2002T43](https://catalog.ldc.upenn.edu/LDC2002T43) for transcripts), which consists of two test subsets - Switchboard (SW) and CallHome (CH). 
 
-| SW   | CH   | Sum      | AM                    | AM size (M) | Unit       | LM     | LM size (M) | Data Aug. | Ext. Data | Paper              |
-| :--- | :--- | -------- | :-------------------- | :---------- | :--------- | :----- | :---------- | --------- | --------- | ------------------ |
-| 10.3 | 19.3 | \[15.0\] | BLSTM                 | 13.47       | Mono-phone | 4-gram |             | SP        | ---       | CTC-CRF ICASSP2019 |
-| 9.8  | 18.8 | 14.3     | VGG BLSTM             | 39.15       | Mono-phone | 4-gram |             | SP        | ---       | CAT IS2020         |
-| 8.8  | 17.4 | 13.1     | VGG BLSTM             | 39.15       | Mono-phone | LSTM   |             | SP        | ---       | CAT IS2020         |
-| 9.7  | 18.4 | 14.1     | chunk-based VGG BLSTM | 39.15       | Mono-phone | 4-gram |             | SP        | ---       | CAT IS2020         |
-|      |      |          |                       |             |            |        |             |           |           |                    |
-|      |      |          |                       |             |            |        |             |           |           |                    |
+Results in square brackets denote the weighted average over SW and CH based on our calculation when not reported in the original paper. 
+
+Results are sorted by `Sum` WER.
+
+| SW   | CH   | Sum      | AM                    | AM size (M) | Unit       | LM          | LM size (M) | Data Aug.    | Ext. Data          | Paper                                  |
+| :--- | :--- | -------- | :-------------------- | :---------- | :--------- | :---------- | :---------- | ------------ | ------------------ | -------------------------------------- |
+| 6.4  | 13.4 | 9.9      | BLSTM-LSTM            | 57          | char       | LSTM        | 84          | SP, SA, etc. | Fisher transcripts | [Advancing RNN-T](#arnn-t) ICASSP2021  |
+| 7.2  | 14.4 | 10.8     | TDNN-f                | ?           | Word       | Transformer | 25          | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
+| 7.9  | 15.7 | 11.8     | BLSTM-LSTM            | 57          | Char       | LSTM        | 5           | SP, SA, etc. | ---                | [Advancing RNN-T](#arnn-t) ICASSP2021  |
+| 8.3  | 17.1 | [12.7]   | TDNN-LSTM             | ?           | bi-phone   | LSTM        | ?           | SP           | Fisher transcripts | [LF-MMI](#lf-mmi) TASLP2018            |
+| 8.6  | 17.0 | 12.8     | TDNN-f                | ?           | Word       | 4-gram      | ?           | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
+| 8.5  | 17.4 | [13.0]   | TDNN-LSTM             | ?           | bi-phone   | LSTM        | ?           | SP           | Fisher transcripts | [EE-LF-MMI](#lf-mmi) TASLP2018         |
+| 8.8  | 17.4 | 13.1     | VGG BLSTM             | 39.2        | Mono-phone | LSTM        | ?           | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 9.7  | 18.4 | 14.1     | chunk-based VGG BLSTM | 39.2        | Mono-phone | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 9.8  | 18.8 | 14.3     | VGG BLSTM             | 39.2        | Mono-phone | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 10.3 | 19.3 | \[14.8\] | BLSTM                 | 13.5        | Mono-phone | 4-gram      | 1.74        | SP           | Fisher transcripts | [CTC-CRF](#ctc-crf) ICASSP2019         |
 
 ## FisherSwbd
+
+The Fisher dataset contains about 1600 hours of English conversational telephone speech (First part: [LDC2004S13](https://catalog.ldc.upenn.edu/LDC2004S13) for speech data, [LDC2004T19](https://catalog.ldc.upenn.edu/LDC2004T19) for transcripts; second part:   [LDC2005S13](https://catalog.ldc.upenn.edu/LDC2005S13) for speech data,  [LDC2005T19](https://catalog.ldc.upenn.edu/LDC2005T19) for transcripts). 
+
+`FisherSwbd` includes both Fisher and Switchboard datasets, which is arount 2000 hours in total. Evaluation is commonly conducted over eval2000 and RT03 ([LDC2007S10](https://catalog.ldc.upenn.edu/LDC2007S10)) datasets.
+
+Results are sorted by `Sum` WER.
+
+| SW   | CH   | Sum    | RT03 | AM        | AM size (M) | Unit     | LM   | LM size (M) | Data Aug. | Ext. Data | Paper                          |
+| :--- | :--- | ------ | ---- | :-------- | :---------- | :------- | :--- | :---------- | --------- | --------- | ------------------------------ |
+| 7.5  | 14.3 | [10.9] | 10.7 | TDNN-LSTM | ?           | bi-phone | LSTM | ?           | SP        | ---       | [LF-MMI](#lf-mmi) TASLP2018    |
+| 7.6  | 14.5 | [11.1] | 11.0 | TDNN-LSTM | ?           | bi-phone | LSTM | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
 
 ## Librispeech
 
@@ -91,14 +112,18 @@ There are four test sets. For the sake of display, the better for eval real, the
 | :--- | :--- |
 | CTC-CRF<a name="ctc-crf"></a> ICASSP2019 | H. Xiang, Z. Ou. CRF-based Single-stage Acoustic Modeling with CTC Topology. ICASSP, 2019. |
 | CAT IS2020<a name="cat"></a> | K. An, H. Xiang, Z. Ou. CAT: A CTC-CRF based ASR Toolkit Bridging the Hybrid and the End-to-end Approaches towards Data Efficiency and Low Latency. INTERSPEECH, 2020.|
-|NAS SLT2021 | H. Zheng, K. AN, Z. Ou. Efficient Neural Architecture Search for End-to-end Speech Recognition via Straight-Through Gradients. SLT 2021.|
-|Conformer | Anmol Gulati, James Qin, Chung-Cheng Chiu, Niki Parmar, Yu Zhang, Jiahui Yu, Wei Han, Shibo Wang, Zhengdong Zhang, Yonghui Wu, Ruoming Pang. Conformer: Convolution-augmented Transformer for Speech Recognition. INTERSPEECH 2020. |
-|ContextNet | Wei Han∗ , Zhengdong Zhang∗ , Yu Zhang, Jiahui Yu, Chung-Cheng Chiu, James Qin, Anmol Gulati, Ruoming Pang, Yonghui Wu. ContextNet: Improving Convolutional Neural Networks for Automatic Speech Recognition with Global Context. INTERSPEECH 2020. |
-|ASAPP-ASR | Jing Pan, Joshua Shapiro, Jeremy Wohlwend, Kyu J. Han, Tao Lei, Tao Ma. ASAPP-ASR: Multistream CNN and Self-Attentive SRU for SOTA Speech Recognition. INTERSPEECH 2020. |
-|U2 | Binbin Zhang , Di Wu , Zhuoyuan Yao , Xiong Wang, Fan Yu, Chao Yang, Liyong Guo, Yaguang Hu, Lei Xie , Xin Lei. Unified Streaming and Non-streaming Two-pass End-to-end Model for Speech Recognition. |
-|Kaldi-CHiME4 | Szu-Jui Chen, Aswin Shanmugam Subramanian, Hainan Xu, Shinji Watanabe. Building state-of-the-art distant speech recognition using the CHiME-4 challenge with a setup of speech enhancement baseline. INTERSPEECH 2018. |
-|USTC-iFlytek CHiME4  system | Jun Du , Yan-Hui Tu , Lei Sun , Feng Ma , Hai-Kun Wang , Jia Pan , Cong Liu , Jing-Dong Chen , Chin-Hui Lee. The USTC-iFlytek System for CHiME-4 Challenge. |
-|Complex Spectral Mapping | Zhong-Qiu Wang,  Peidong Wang , DeLiang Wang. Complex Spectral Mapping for Single- and Multi-Channel Speech Enhancement and Robust ASR. TASLP 2020. |
-|intermediate CTC loss | Jaesong Lee , Shinji Watanabe. Intermediate Loss Regularization for CTC-based Speech Recognition. ICASSP 2021 |
-|WNARS | Zhichao Wang, Wenwen Yang, Pan Zhou, Wei Chen. WNARS: WFST based Non-autoregressive Streaming End-to-End Speech Recognition. |
+|NAS<a name="st-nas"></a> SLT2021 | H. Zheng, K. AN, Z. Ou. Efficient Neural Architecture Search for End-to-end Speech Recognition via Straight-Through Gradients. SLT 2021.|
+|Conformer<a name="conformer"></a> | Anmol Gulati, James Qin, Chung-Cheng Chiu, Niki Parmar, Yu Zhang, Jiahui Yu, Wei Han, Shibo Wang, Zhengdong Zhang, Yonghui Wu, Ruoming Pang. Conformer: Convolution-augmented Transformer for Speech Recognition. INTERSPEECH 2020. |
+|ContextNet<a name="contextnet"></a> | Wei Han∗ , Zhengdong Zhang∗ , Yu Zhang, Jiahui Yu, Chung-Cheng Chiu, James Qin, Anmol Gulati, Ruoming Pang, Yonghui Wu. ContextNet: Improving Convolutional Neural Networks for Automatic Speech Recognition with Global Context. INTERSPEECH 2020. |
+|ASAPP-ASR<a name="asapp-asr"></a> | Jing Pan, Joshua Shapiro, Jeremy Wohlwend, Kyu J. Han, Tao Lei, Tao Ma. ASAPP-ASR: Multistream CNN and Self-Attentive SRU for SOTA Speech Recognition. INTERSPEECH 2020. |
+|U2<a name="u2"></a> | Binbin Zhang , Di Wu , Zhuoyuan Yao , Xiong Wang, Fan Yu, Chao Yang, Liyong Guo, Yaguang Hu, Lei Xie , Xin Lei. Unified Streaming and Non-streaming Two-pass End-to-end Model for Speech Recognition. |
+|Kaldi-CHiME4<a name="kaldi-chime4"></a> | Szu-Jui Chen, Aswin Shanmugam Subramanian, Hainan Xu, Shinji Watanabe. Building state-of-the-art distant speech recognition using the CHiME-4 challenge with a setup of speech enhancement baseline. INTERSPEECH 2018. |
+|USTC-iFlytek CHiME4  system<a name="ustc-chime4"></a> | Jun Du , Yan-Hui Tu , Lei Sun , Feng Ma , Hai-Kun Wang , Jia Pan , Cong Liu , Jing-Dong Chen , Chin-Hui Lee. The USTC-iFlytek System for CHiME-4 Challenge. |
+|Complex Spectral Mapping<a name="complex-spectral-mapping"></a> | Zhong-Qiu Wang,  Peidong Wang , DeLiang Wang. Complex Spectral Mapping for Single- and Multi-Channel Speech Enhancement and Robust ASR. TASLP 2020. |
+|intermediate CTC loss<a name="inter-ctc"></a> | Jaesong Lee , Shinji Watanabe. Intermediate Loss Regularization for CTC-based Speech Recognition. ICASSP 2021 |
+|WNARS<a name="wnars"></a> | Zhichao Wang, Wenwen Yang, Pan Zhou, Wei Chen. WNARS: WFST based Non-autoregressive Streaming End-to-End Speech Recognition. |
+|LF-MMI<a name="lf-mmi"></a> | H. Hadian, H. Sameti, D. Povey, and S. Khudanpur, “Flat- start single-stage discriminatively trained HMM-based models for ASR,” *IEEE/ACM Transactions on Audio, Speech, and Language Processing*, 2018. |
+|ESPRESSO<a name="espresso"></a> | Yiming Wang, Tongfei Chen, Hainan Xu, Shuoyang Ding, Hang Lv, Yiwen Shao, Nanyun Peng, Lei Xie, Shinji Watanabe, and Sanjeev Khudanpur, “Espresso: A fast end- to-end neural speech recognition toolkit,” in *ASRU*, 2019. |
+| ARNN-T<a name="arnn-r"></a> | George Saon, Zoltan Tueske, Daniel Bolanos, Brian Kingsbury. Advancing RNN Transducer Technology for Speech Recognition. ICASSP, 2021. |
+| P-Rescroing<a name="p-rescoring"></a> | Ke Li, Daniel Povey, Sanjeev Khudanpur. A Parallelizable Lattice Rescoring Strategy with Neural Language Models. ICASSP, 2021. |
 
