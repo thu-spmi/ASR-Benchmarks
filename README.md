@@ -82,7 +82,7 @@ There are four test sets. For the sake of display, the better for test clean, th
 | ---           | ---           | 1.9            | 3.9            | Conformer       | 119         | word piece | LSTM                                      | ?           | SA        | ---       | [Conformer](#conformer)          |
 | ---           | ---           | 1.9            | 4.1            | ContextNet (L)  | 112.7       | word piece | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
 | 3.87          | 10.28         | 4.09           | 10.65          | BLSTM           | 13          | phone      | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
-
+| ---           | ---           | 4.28           | ---            | TDNN            | ?          | tri-phone      | 4-gram                                    | 1.45            | ---       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
 
 ## AISHELL-1
 
@@ -125,6 +125,7 @@ There are four test sets. For the sake of display, the better for eval real, the
 |intermediate CTC loss<a name="inter-ctc"></a> | Jaesong Lee , Shinji Watanabe. Intermediate Loss Regularization for CTC-based Speech Recognition. ICASSP 2021 |
 |WNARS<a name="wnars"></a> | Zhichao Wang, Wenwen Yang, Pan Zhou, Wei Chen. WNARS: WFST based Non-autoregressive Streaming End-to-End Speech Recognition. |
 |LF-MMI<a name="lf-mmi"></a> | H. Hadian, H. Sameti, D. Povey, and S. Khudanpur, “Flat- start single-stage discriminatively trained HMM-based models for ASR,” *IEEE/ACM Transactions on Audio, Speech, and Language Processing*, 2018. |
+|LF-MMI Interspeech<a name="lf-mmi-is"></a> | Povey, D., Peddinti, V., Galvez, D., Ghahremani, P., Manohar, V., Na, X., Wang, Y., Khudanpur, S. (2016) Purely Sequence-Trained Neural Networks for ASR Based on Lattice-Free MMI. Proc. Interspeech 2016, 2751-2755. |
 |ESPRESSO<a name="espresso"></a> | Yiming Wang, Tongfei Chen, Hainan Xu, Shuoyang Ding, Hang Lv, Yiwen Shao, Nanyun Peng, Lei Xie, Shinji Watanabe, and Sanjeev Khudanpur, “Espresso: A fast end- to-end neural speech recognition toolkit,” in *ASRU*, 2019. |
 | ARNN-T<a name="arnn-r"></a> | George Saon, Zoltan Tueske, Daniel Bolanos, Brian Kingsbury. Advancing RNN Transducer Technology for Speech Recognition. ICASSP, 2021. |
 | P-Rescroing<a name="p-rescoring"></a> | Ke Li, Daniel Povey, Sanjeev Khudanpur. A Parallelizable Lattice Rescoring Strategy with Neural Language Models. ICASSP, 2021. |
