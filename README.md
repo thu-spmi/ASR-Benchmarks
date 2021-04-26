@@ -78,10 +78,11 @@ There are four test sets. For the sake of display, the better for test clean, th
 
 | dev clean WER | dev other WER | test clean WER | test other WER | AM              | AM size (M) | Unit       | LM                                        | LM size (M) | Data Aug. | Ext. Data | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 3.87          | 10.28         | 4.09           | 10.65          | BLSTM           | 13          | phone      | 4-gram                                    |             | ---       | ---       | CTC-CRF ICASSP2019 |
-| ---           | ---           | 1.9            | 3.9            | Conformer       | 118         | word piece | LSTM                                      |             | SA        | ---       | Conformer          |
-| 1.55          | 4.22          | 1.75           | 4.46           | multistream CNN |             | triphone   | selfattentive simple recurrent unit (SRU) |             | SA        | ---       | ASAPP-ASR          |
-| ---           | ---           | 1.9            | 4.1            | ContextNet (L)  | 112.7       | word piece | LSTM                                      |             | SA        | ---       | ContextNet         |
+| 1.55          | 4.22          | 1.75           | 4.46           | multistream CNN |             | triphone   | selfattentive simple recurrent unit (SRU) |             | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
+| ---           | ---           | 1.9            | 3.9            | Conformer       | 118         | word piece | LSTM                                      |             | SA        | ---       | [Conformer](#conformer)          |
+| ---           | ---           | 1.9            | 4.1            | ContextNet (L)  | 112.7       | word piece | LSTM                                      |             | SA        | ---       | [ContextNet](#contextnet)         |
+| 3.87          | 10.28         | 4.09           | 10.65          | BLSTM           | 13          | phone      | 4-gram                                    |             | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
+
 
 ## AISHELL-1
 
@@ -89,10 +90,11 @@ AISHELL-ASR0009-OS1, is a  **178**- hour open source mandarin speech corpus. It 
 
 | test CER | AM                            | AM size (M) | Unit      | LM                  | LM size (M) | Data Aug. | Ext. Data | Paper                 |
 | :------- | :---------------------------- | :---------- | :-------- | :------------------ | :---------- | --------- | --------- | --------------------- |
-| 6.34     | VGGBLSTM                      | 16M         | phone     | 4-gram              |             | SP        | ---       | CAT IS2020            |
-| 4.72     | Conformer based CTC/attention |             | character | attention rescoring |             | SA+SP     | ---       | U2                    |
-| 5.2      | Comformer                     |             | character | ---                 |             | SA        | ---       | intermediate CTC loss |
-| 4.5      | Conformer based CTC/attention |             | character | LSTM                |             | SA+SP     | ---       | WNARS                 |
+| 4.5      | Conformer based CTC/attention |             | character | LSTM                |             | SA+SP     | ---       | [WNARS](#wnars)                 |
+| 4.72     | Conformer based CTC/attention |             | character | attention rescoring |             | SA+SP     | ---       | [U2](#u2)                    |
+| 5.2      | Comformer                     |             | character | ---                 |             | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
+| 6.34     | VGGBLSTM                      | 16M         | phone     | 4-gram              |             | SP        | ---       | [CAT](#cat) IS2020            |
+
 
 ## CHiME-4
 
@@ -102,10 +104,10 @@ There are four test sets. For the sake of display, the better for eval real, the
 
 | dev simu WER | dev real WER | eval simu WER | eval real WER | AM                  | AM size (M) | Unit  | LM   | LM size (M) | Data Aug. | Ext. Data | Paper                       |
 | :----------- | :----------- | ------------- | ------------- | :------------------ | :---------- | :---- | :--- | :---------- | --------- | --------- | --------------------------- |
-| 1.78         | 1.69         | 2.12          | 2.24          | 6 DCNN ensemble     |             | phone | LSTM |             | ---       | ---       | USTC-iFlytek CHiME4  system |
-| 2.10         | 1.90         | 2.66          | 2.74          | TDNN with LF-MMI    |             | phone | LSTM |             | ---       | ---       | Kaldi-CHiME4                |
-| 1.15         | 1.50         | 1.45          | 1.99          | wide-residual BLSTM |             | phone | LSTM |             | ---       | ---       | Complex Spectral Mapping    |
-|              |              |               |               |                     |             |       |      |             |           |           |                             |
+| 1.15         | 1.50         | 1.45          | 1.99          | wide-residual BLSTM |             | phone | LSTM |             | ---       | ---       | [Complex Spectral Mapping](#complex-spectral-mapping)    |
+| 1.78         | 1.69         | 2.12          | 2.24          | 6 DCNN ensemble     |             | phone | LSTM |             | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4)  system |
+| 2.10         | 1.90         | 2.66          | 2.74          | TDNN with LF-MMI    |             | phone | LSTM |             | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
+
 
 ## References
 | Short-hands | Full references |
@@ -126,4 +128,3 @@ There are four test sets. For the sake of display, the better for eval real, the
 |ESPRESSO<a name="espresso"></a> | Yiming Wang, Tongfei Chen, Hainan Xu, Shuoyang Ding, Hang Lv, Yiwen Shao, Nanyun Peng, Lei Xie, Shinji Watanabe, and Sanjeev Khudanpur, “Espresso: A fast end- to-end neural speech recognition toolkit,” in *ASRU*, 2019. |
 | ARNN-T<a name="arnn-r"></a> | George Saon, Zoltan Tueske, Daniel Bolanos, Brian Kingsbury. Advancing RNN Transducer Technology for Speech Recognition. ICASSP, 2021. |
 | P-Rescroing<a name="p-rescoring"></a> | Ke Li, Daniel Povey, Sanjeev Khudanpur. A Parallelizable Lattice Rescoring Strategy with Neural Language Models. ICASSP, 2021. |
-
