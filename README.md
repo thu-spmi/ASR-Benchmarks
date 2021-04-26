@@ -78,10 +78,10 @@ There are four test sets. For the sake of display, the better for test clean, th
 
 | dev clean WER | dev other WER | test clean WER | test other WER | AM              | AM size (M) | Unit       | LM                                        | LM size (M) | Data Aug. | Ext. Data | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 1.55          | 4.22          | 1.75           | 4.46           | multistream CNN |             | triphone   | selfattentive simple recurrent unit (SRU) |             | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
-| ---           | ---           | 1.9            | 3.9            | Conformer       | 118         | word piece | LSTM                                      |             | SA        | ---       | [Conformer](#conformer)          |
-| ---           | ---           | 1.9            | 4.1            | ContextNet (L)  | 112.7       | word piece | LSTM                                      |             | SA        | ---       | [ContextNet](#contextnet)         |
-| 3.87          | 10.28         | 4.09           | 10.65          | BLSTM           | 13          | phone      | 4-gram                                    |             | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
+| 1.55          | 4.22          | 1.75           | 4.46           | multistream CNN | ?           | triphone   | selfattentive simple recurrent unit (SRU) | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
+| ---           | ---           | 1.9            | 3.9            | Conformer       | 119         | word piece | LSTM                                      | ?           | SA        | ---       | [Conformer](#conformer)          |
+| ---           | ---           | 1.9            | 4.1            | ContextNet (L)  | 112.7       | word piece | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
+| 3.87          | 10.28         | 4.09           | 10.65          | BLSTM           | 13          | phone      | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
 
 
 ## AISHELL-1
@@ -90,10 +90,10 @@ AISHELL-ASR0009-OS1, is a  **178**- hour open source mandarin speech corpus. It 
 
 | test CER | AM                            | AM size (M) | Unit      | LM                  | LM size (M) | Data Aug. | Ext. Data | Paper                 |
 | :------- | :---------------------------- | :---------- | :-------- | :------------------ | :---------- | --------- | --------- | --------------------- |
-| 4.5      | Conformer based CTC/attention |             | character | LSTM                |             | SA+SP     | ---       | [WNARS](#wnars)                 |
-| 4.72     | Conformer based CTC/attention |             | character | attention rescoring |             | SA+SP     | ---       | [U2](#u2)                    |
-| 5.2      | Comformer                     |             | character | ---                 |             | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
-| 6.34     | VGGBLSTM                      | 16M         | phone     | 4-gram              |             | SP        | ---       | [CAT](#cat) IS2020            |
+| 4.5      | Conformer based CTC/attention | ?           | character | LSTM                | ?           | SA+SP     | ---       | [WNARS](#wnars)                 |
+| 4.72     | Conformer based CTC/attention | ?           | character | attention rescoring | ?           | SA+SP     | ---       | [U2](#u2)                    |
+| 5.2      | Comformer                     | ?           | character | ---                 | ?           | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
+| 6.34     | VGGBLSTM                      | 16M         | phone     | 4-gram              | 0.7         | SP        | ---       | [CAT](#cat) IS2020            |
 
 
 ## CHiME-4
@@ -104,9 +104,9 @@ There are four test sets. For the sake of display, the better for eval real, the
 
 | dev simu WER | dev real WER | eval simu WER | eval real WER | AM                  | AM size (M) | Unit  | LM   | LM size (M) | Data Aug. | Ext. Data | Paper                       |
 | :----------- | :----------- | ------------- | ------------- | :------------------ | :---------- | :---- | :--- | :---------- | --------- | --------- | --------------------------- |
-| 1.15         | 1.50         | 1.45          | 1.99          | wide-residual BLSTM |             | phone | LSTM |             | ---       | ---       | [Complex Spectral Mapping](#complex-spectral-mapping)    |
-| 1.78         | 1.69         | 2.12          | 2.24          | 6 DCNN ensemble     |             | phone | LSTM |             | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4)  system |
-| 2.10         | 1.90         | 2.66          | 2.74          | TDNN with LF-MMI    |             | phone | LSTM |             | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
+| 1.15         | 1.50         | 1.45          | 1.99          | wide-residual BLSTM | ?           | phone | LSTM | ?           | ---       | ---       | [Complex Spectral Mapping](#complex-spectral-mapping)    |
+| 1.78         | 1.69         | 2.12          | 2.24          | 6 DCNN ensemble     | ?           | phone | LSTM | ?           | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4)  system |
+| 2.10         | 1.90         | 2.66          | 2.74          | TDNN with LF-MMI    | ?           | phone | LSTM | ?           | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
 
 
 ## References
