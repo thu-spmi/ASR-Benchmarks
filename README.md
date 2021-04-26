@@ -82,7 +82,7 @@ There are four test sets. For the sake of display, the better for test clean, th
 | ---           | ---           | 1.9            | 3.9            | Conformer       | 119         | word piece | LSTM                                      | ?           | SA        | ---       | [Conformer](#conformer)          |
 | ---           | ---           | 1.9            | 4.1            | ContextNet (L)  | 112.7       | word piece | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
 | 3.87          | 10.28         | 4.09           | 10.65          | BLSTM           | 13          | phone      | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
-| ---           | ---           | 4.28           | ---            | TDNN            | ?          | tri-phone      | 4-gram                                    | 1.45            | ---       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
+| ---           | ---           | 4.28           | ---            | TDNN            | ?          | tri-phone      | 4-gram                                    | ?            | SP       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
 
 ## AISHELL-1
 
