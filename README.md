@@ -127,5 +127,5 @@ There are four test sets. For the sake of display, the better for eval real, the
 |LF-MMI<a name="lf-mmi"></a> | H. Hadian, H. Sameti, D. Povey, and S. Khudanpur, “Flat- start single-stage discriminatively trained HMM-based models for ASR,” *IEEE/ACM Transactions on Audio, Speech, and Language Processing*, 2018. |
 |LF-MMI Interspeech<a name="lf-mmi-is"></a> | Povey, D., Peddinti, V., Galvez, D., Ghahremani, P., Manohar, V., Na, X., Wang, Y., Khudanpur, S. (2016) Purely Sequence-Trained Neural Networks for ASR Based on Lattice-Free MMI. Proc. Interspeech 2016, 2751-2755. |
 |ESPRESSO<a name="espresso"></a> | Yiming Wang, Tongfei Chen, Hainan Xu, Shuoyang Ding, Hang Lv, Yiwen Shao, Nanyun Peng, Lei Xie, Shinji Watanabe, and Sanjeev Khudanpur, “Espresso: A fast end- to-end neural speech recognition toolkit,” in *ASRU*, 2019. |
-| ARNN-T<a name="arnn-r"></a> | George Saon, Zoltan Tueske, Daniel Bolanos, Brian Kingsbury. Advancing RNN Transducer Technology for Speech Recognition. ICASSP, 2021. |
+| ARNN-T<a name="arnn-t"></a> | George Saon, Zoltan Tueske, Daniel Bolanos, Brian Kingsbury. Advancing RNN Transducer Technology for Speech Recognition. ICASSP, 2021. |
 | P-Rescroing<a name="p-rescoring"></a> | Ke Li, Daniel Povey, Sanjeev Khudanpur. A Parallelizable Lattice Rescoring Strategy with Neural Language Models. ICASSP, 2021. |
