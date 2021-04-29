@@ -40,12 +40,12 @@ Results are sorted by `eval92` WER.
 | eval92 WER | dev93 WER | Unit | AM | AM size (M) | LM | LM size (M) |Data Aug. | Ext. Data | Paper |
 | --------- | -------- | - | - | ------- | ----------- | --- | ---- | ---- | ---- |
 | 2.7 | 5.3 | bi-phone | LF-MMI,  TDNN-LSTM | ? | 4-gram | ? |SP | --- | [LF-MMI](#lf-mmi) TASLP2018 |
-| 2.77       | 5.68      | mono-phone | CTC-CRF, TDNN NAS | 11.9        | 4-gram                                      | 0.18        | SP        | ---       | [NAS](#st-nas) SLT2021         |
+| 2.77       | 5.68      | mono-phone | CTC-CRF, TDNN NAS | 11.9        | 4-gram                                      | 2.59    | SP        | ---       | [NAS](#st-nas) SLT2021         |
 | 3.0        | 6.0      | bi-phone  | EE-LF-MMI, TDNN-LSTM | ?             | 4-gram                                      | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
-| 3.2        | 5.7      | mono-phone  | CTC-CRF, VGG BLSTM | 16          | 4-gram                                      | 0.18        | SP        | ---       | [CAT](#cat) IS2020             |
+| 3.2        | 5.7      | mono-phone  | CTC-CRF, VGG BLSTM | 16          | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020             |
 | 3.4        | 5.9       | sub-word| ATT, LSTM | 18            | --- | 113        | ---       | ---       | [ESPRESSO](#espresso) ASRU2019 |
-| 3.79       | 6.23    | mono-phone  | CTC-CRF, BLSTM | 13.5         | 4-gram                                      | 0.18        | SP        | ---       | [CTC-CRF](#ctc-crf) ICASSP2019 |
-| 5.0        | 8.1      | mono-char | CTC-CRF, VGG BLSTM | 16           | 4-gram                                      | 0.18        | SP        | ---       | [CAT](#cat) IS2020             |
+| 3.79       | 6.23    | mono-phone  | CTC-CRF, BLSTM | 13.5         | 4-gram                                      | 2.59    | SP        | ---       | [CTC-CRF](#ctc-crf) ICASSP2019 |
+| 5.0        | 8.1      | mono-char | CTC-CRF, VGG BLSTM | 16           | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020             |
 
 ## Swbd
 
