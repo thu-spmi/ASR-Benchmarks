@@ -24,7 +24,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 |**NAS**| Neural Architecture Search|
 |**WER**| Word Error Rate |
 |**CER**| Character Error Rate |
-|**L**| #Layer, e.g. L24 denotes that the number of layers is 24 |
+|**L**| #Layer, e.g., L24 denotes that the number of layers is 24 |
 | --- | not applied |
 | ? | not known from the original paper |
 
