@@ -30,7 +30,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 
 ## WSJ
 
-This dataset contains about **80 hours** of training data, consisting of read sentences from the Wall Street Journal, recorded under clean conditions. Available from the LDC as WSJ0 under the catalog number [LDC93S6B](https://catalog.ldc.upenn.edu/LDC93S6B). The vocabulary size is 65K words. 
+This dataset contains about **80 hours** of training data, consisting of read sentences from the Wall Street Journal, recorded under clean conditions. Available from the LDC as WSJ0 under the catalog number [LDC93S6B](https://catalog.ldc.upenn.edu/LDC93S6B).
 
 The evaluation dataset contains the simpler eval92 subset and the harder dev93 subset.
 
