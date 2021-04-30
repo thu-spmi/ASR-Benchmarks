@@ -57,7 +57,7 @@ Results are sorted by `Sum` WER.
 
 | SW   | CH   | Sum      | Unit       |AM     | AM size (M) |  LM          | LM size (M) | Data Aug.    | Ext. Data          | Paper                                  |
 | :--- | :--- | -------- | :-------------------- | :---------- | :--------- | :---------- | :---------- | ------------ | ------------------ | -------------------------------------- |
-| 6.3  | 13.3 | [9.8]      |charBPE &phoneBPE       | ATT+CTC, Transformers | ?          |  multi-level RNNLM        | ?          | SA | Fisher transcripts | [phoneBPE-IS2020](#phoneBPE-IS2020)  |
+| 6.3  | 13.3 | [9.8]      |charBPE &phoneBPE       | ATT+CTC, Transformers | ? 24-layer enc, 12-layer dec          |  multi-level RNNLM        | ?          | SA | Fisher transcripts | [phoneBPE-IS2020](#phoneBPE-IS2020)  |
 | 6.4  | 13.4 | 9.9      |char       | RNN-T, BLSTM-LSTM, ivector  | 57          |  LSTM        | 84          | SP, SA, etc. | Fisher transcripts | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 6.5 | 13.9 | 10.2    |phone   |  LF-MMI, TDNN-f        | ?           | Transformer | 25          | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
 | 6.8 | 14.1 | [10.5]    |wp 1k   |  ATT               | ?           | LSTM | ?         | SA           | Fisher transcripts | [SpecAug](#SpecAug) IS2019 |
