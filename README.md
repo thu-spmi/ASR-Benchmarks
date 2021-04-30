@@ -22,7 +22,6 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 |**Ext. Data**| whether any forms of external data (either speech data or text corpus) are used |
 |**ATT**| Attention based Seq2Seq|
 |**NAS**| Neural Architecture Search|
-|**WPM**| Word Piece Model|
 |**WER**| Word Error Rate |
 |**CER**| Character Error Rate |
 | --- | not applied |
@@ -31,7 +30,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 
 ## WSJ
 
-This dataset contains about **80 hours** of training data, consisting of read sentences from the Wall Street Journal, recorded under clean conditions. Available from the LDC as WSJ0 under the catalog number [LDC93S6B](https://catalog.ldc.upenn.edu/LDC93S6B).
+This dataset contains about **80 hours** of training data, consisting of read sentences from the Wall Street Journal, recorded under clean conditions. Available from the LDC as WSJ0 under the catalog number [LDC93S6B](https://catalog.ldc.upenn.edu/LDC93S6B). The vocabulary size is 65K words. 
 
 The evaluation dataset contains the simpler eval92 subset and the harder dev93 subset.
 
@@ -42,10 +41,11 @@ Results are sorted by `eval92` WER.
 | 2.7 | 5.3 | bi-phone | LF-MMI,  TDNN-LSTM | ? | 4-gram | ? |SP | --- | [LF-MMI](#lf-mmi) TASLP2018 |
 | 2.77       | 5.68      | mono-phone | CTC-CRF, TDNN NAS | 11.9        | 4-gram                                      | 2.59    | SP        | ---       | [NAS](#st-nas) SLT2021         |
 | 3.0        | 6.0      | bi-phone  | EE-LF-MMI, TDNN-LSTM | ?             | 4-gram                                      | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
-| 3.2        | 5.7      | mono-phone  | CTC-CRF, VGG BLSTM | 16          | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020             |
-| 3.4        | 5.9       | sub-word| ATT, LSTM | 18            | --- | 113        | ---       | ---       | [ESPRESSO](#espresso) ASRU2019 |
+| 3.2        | 5.7      | mono-phone  | CTC-CRF, VGG-BLSTM | 16          | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020             |
+| 3.4        | 5.9       | sub-word| ATT, LSTM | 18            | RNN | 113        | ---       | ---       | [ESPRESSO](#espresso) ASRU2019 |
 | 3.79       | 6.23    | mono-phone  | CTC-CRF, BLSTM | 13.5         | 4-gram                                      | 2.59    | SP        | ---       | [CTC-CRF](#ctc-crf) ICASSP2019 |
-| 5.0        | 8.1      | mono-char | CTC-CRF, VGG BLSTM | 16           | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020             |
+| 4.9        | ---      | mono-char | ATT+CTC, Transformers | ?           | 4-gram                                      | ?    | SA        | ---       | [phoneBPE-IS2020](#phoneBPE-IS2020) |
+| 5.0        | 8.1      | mono-char | CTC-CRF, VGG-BLSTM | 16           | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020 |
 
 ## Swbd
 
@@ -57,17 +57,18 @@ Results are sorted by `Sum` WER.
 
 | SW   | CH   | Sum      | Unit       |AM     | AM size (M) |  LM          | LM size (M) | Data Aug.    | Ext. Data          | Paper                                  |
 | :--- | :--- | -------- | :-------------------- | :---------- | :--------- | :---------- | :---------- | ------------ | ------------------ | -------------------------------------- |
+| 6.3  | 13.3 | [9.8]      |charBPE &phoneBPE       | ATT+CTC, Transformers | ?          |  multi-level RNNLM        | ?          | SA | Fisher transcripts | [phoneBPE-IS2020](#phoneBPE-IS2020)  |
 | 6.4  | 13.4 | 9.9      |char       | RNN-T, BLSTM-LSTM, ivector  | 57          |  LSTM        | 84          | SP, SA, etc. | Fisher transcripts | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 6.5 | 13.9 | 10.2    |phone   |  LF-MMI, TDNN-f        | ?           | Transformer | 25          | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
-| 6.8 | 14.1 | [10.5]    |WPM 1k   |  ATT               | ?           | LSTM | ?         | SA           | Fisher transcripts | [SpecAug](#SpecAug) IS2019 |
+| 6.8 | 14.1 | [10.5]    |wp 1k   |  ATT               | ?           | LSTM | ?         | SA           | Fisher transcripts | [SpecAug](#SpecAug) IS2019 |
 | 7.9  | 15.7 | 11.8     | char      | RNN-T BLSTM-LSTM            | 57          | LSTM        | 5           | SP, SA, etc. | ---                | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 8.3  | 17.1 | [12.7]  | bi-phone  | LF-MMI, TDNN-LSTM    | ?             | LSTM        | ?           | SP           | Fisher transcripts | [LF-MMI](#lf-mmi) TASLP2018            |
 | 8.6  | 17.0 | 12.8    | phone  | LF-MMI, TDNN-f       | ?             | 4-gram      | ?           | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
 | 8.5  | 17.4 | [13.0]   | bi-phone | EE-LF-MMI, TDNN-LSTM  | ?             | LSTM        | ?           | SP           | Fisher transcripts | [EE-LF-MMI](#lf-mmi) TASLP2018         |
-| 8.8  | 17.4 | 13.1    | mono-phone | CTC-CRF, VGG BLSTM    | 39.2         | LSTM        | ?           | SP           | Fisher transcripts | [CAT](#cat) IS2020 |
+| 8.8  | 17.4 | 13.1    | mono-phone | CTC-CRF, VGG-BLSTM    | 39.2         | LSTM        | ?           | SP           | Fisher transcripts | [CAT](#cat) IS2020 |
 | 9.0  | 18.1 | [13.6] | BPE| ATT/CTC | ?  | Transformer | ?  | SP           | Fisher transcripts | [ESPnet-Transformer](#ESPnet-Transformer) ASRU2019 |
-| 9.7  | 18.4 | 14.1    | mono-phone | CTC-CRF, chunk-based VGG BLSTM | 39.2         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
-| 9.8  | 18.8 | 14.3     | mono-phone| CTC-CRF, VGG BLSTM    | 39.2         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 9.7  | 18.4 | 14.1    | mono-phone | CTC-CRF, chunk-based VGG-BLSTM | 39.2         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 9.8  | 18.8 | 14.3     | mono-phone| CTC-CRF, VGG-BLSTM    | 39.2         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
 | 10.3 | 19.3 | \[14.8\] | mono-phone| CTC-CRF, BLSTM        | 13.5         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CTC-CRF](#ctc-crf) ICASSP2019         |
 
 ## FisherSwbd
@@ -82,7 +83,7 @@ Results are sorted by `Sum` WER.
 | :--- | :--- | ------ | ---- | :------------------- | :---------- | :------- | :--- | :---------- | --------- | --------- | ------------------------------ |
 | 7.5  | 14.3 | [10.9] | 10.7 | bi-phone| LF-MMI, TDNN-LSTM    | ?            | LSTM | ?           | SP        | ---       | [LF-MMI](#lf-mmi) TASLP2018    |
 | 7.6  | 14.5 | [11.1] | 11.0 | bi-phone| EE-LF-MMI, TDNN-LSTM | ?            | LSTM | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
-| 7.3  | 15.0 | 11.2 |?    | mono-phone| CTC-CRF, VGG BLSTM    | 39.2         | LSTM        | ?           | SP           | --- | [CAT](#cat) IS2020 |
+| 7.3  | 15.0 | 11.2 |?    | mono-phone| CTC-CRF, VGG-BLSTM    | 39.2         | LSTM        | ?           | SP           | --- | [CAT](#cat) IS2020 |
 | 8.3  | 15.5 | [11.9] |?    | char | ATT  | ? | --- | ?           | SP           | --- | [Tencent-IS2018](#Tencent-IS2018) |
 | 8.1  | 17.5 | [12.8] |?    | char | RNN-T | ?  | 4-gram | ? | SP           | --- | [Baidu-ASRU2017](#Baidu-ASRU2017) |
 
@@ -106,10 +107,10 @@ AISHELL-ASR0009-OS1, is a  **178- hour** open source mandarin speech corpus. It 
 
 | test CER| Unit  | AM                            | AM size (M)      | LM                  | LM size (M) | Data Aug. | Ext. Data | Paper                 |
 | :------- | :---------------------------- | :---------- | :-------- | :------------------ | :---------- | --------- | --------- | --------------------- |
-| 4.5      | char| Conformer based CTC/attention | ?            | LSTM                | ?           | SA+SP     | ---       | [WNARS](#wnars)                 |
-| 4.72     | char| Conformer based CTC/attention | ?            | attention rescoring | ?           | SA+SP     | ---       | [U2](#u2)                    |
+| 4.5      | char| ATT+CTC, Conformer | ?            | LSTM                | ?           | SA+SP     | ---       | [WNARS](#wnars)                 |
+| 4.72     | char| ATT+CTC, Conformer | ?            | attention rescoring | ?           | SA+SP     | ---       | [U2](#u2)                    |
 | 5.2   | char    | Comformer                     | ?           | ---                 | ?           | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
-| 6.34     | phone   | VGGBLSTM                      | 16M           | 4-gram              | 0.7         | SP        | ---       | [CAT](#cat) IS2020            |
+| 6.34     | phone   | CTC-CRF, VGG-BLSTM            | 16           | 4-gram              | 0.7         | SP        | ---       | [CAT](#cat) IS2020            |
 
 
 ## CHiME-4
@@ -122,7 +123,7 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | :----------- | :----------- | ------------- | ------------- | :------------------ | :---------- | :---- | :--- | :---------- | --------- | --------- | --------------------------- |
 | 1.15         | 1.50         | 1.45          | 1.99        | phone  | wide-residual BLSTM | ?            | LSTM | ?           | ---       | ---       | [Complex Spectral Mapping](#complex-spectral-mapping)    |
 | 1.78         | 1.69         | 2.12          | 2.24         | phone | 6 DCNN ensemble     | ?            | LSTM | ?           | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4)  system |
-| 2.10         | 1.90         | 2.66          | 2.74        | phone  | TDNN with LF-MMI    | ?            | LSTM | ?           | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
+| 2.10         | 1.90         | 2.66          | 2.74        | phone  | LF-MMI, TDNN | ?            | LSTM | ?           | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
 
 
 ## References
@@ -149,3 +150,4 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | ESPnet-Transformer<a name="ESPnet-Transformer"></a> | S. Karita, N. Chen, and et al. A comparative study on transformer vs RNN in speech applications,” ASRU 2019.|
 | Baidu-ASRU2017<a name="Baidu-ASRU2017"></a> | E. Battenberg, J. Chen, R. Child, A. Coates, Y. Li, H. Liu, S. Satheesh, A. Sriram, and Z. Zhu. Exploring neural transducers for end-to-end speech recognition. ASRU 2017. |
 | Tencent-IS2018<a name="Tencent-IS2018"></a> | C. Weng, J. Cui, G. Wang, J. Wang, C. Yu, D. Su, and D. Yu. Improving attention based sequence-to-sequence models for end-to-end English conversational speech recognition. Interspeech 2018 |
+| phoneBPE-IS2020<a name="phoneBPE-IS2020"></a> | Weiran Wang, Guangsen Wang, Aadyot Bhatnagar, Yingbo Zhou, Caiming Xiong, and Richard Socher. An investigation of phone-based subword units for end-to-end speech recognition. Interspeech 2020. |
