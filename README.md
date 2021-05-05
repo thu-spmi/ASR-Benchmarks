@@ -39,6 +39,7 @@ Results are sorted by `eval92` WER.
 
 | eval92 WER | dev93 WER | Unit | AM | AM size (M) | LM | LM size (M) |Data Aug. | Ext. Data | Paper |
 | --------- | -------- | - | - | ------- | ----------- | --- | ---- | ---- | ---- |
+| 2.50 | 5.48 | mono-phone | CTC-CRF, deformable TDNN | 11.9 | 4-gram | 2.59 |SP | --- | [Deformable TDNN](#deformable) |
 | 2.7 | 5.3 | bi-phone | LF-MMI,  TDNN-LSTM | ? | 4-gram | ? |SP | --- | [LF-MMI](#lf-mmi) TASLP2018 |
 | 2.77       | 5.68      | mono-phone | CTC-CRF, TDNN NAS | 11.9        | 4-gram                                      | 2.59    | SP        | ---       | [NAS](#st-nas) SLT2021         |
 | 3.0        | 6.0      | bi-phone  | EE-LF-MMI, TDNN-LSTM | ?             | 4-gram                                      | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
@@ -130,6 +131,7 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 ## References
 | Short-hands | Full references |
 | :--- | :--- |
+| Deformable TDNN<a name="deformable"></a> | Keyu An, Yi Zhang, Zhijian Ou. Deformable TDNN with adaptive receptive fields for speech recognition. arXiv:2104.14791 |
 | CTC-CRF<a name="ctc-crf"></a> ICASSP2019 | H. Xiang, Z. Ou. CRF-based Single-stage Acoustic Modeling with CTC Topology. ICASSP 2019. |
 | CAT IS2020<a name="cat"></a> | K. An, H. Xiang, Z. Ou. CAT: A CTC-CRF based ASR Toolkit Bridging the Hybrid and the End-to-end Approaches towards Data Efficiency and Low Latency. INTERSPEECH 2020.|
 |NAS<a name="st-nas"></a> SLT2021 | H. Zheng, K. AN, Z. Ou. Efficient Neural Architecture Search for End-to-end Speech Recognition via Straight-Through Gradients. SLT 2021. |
