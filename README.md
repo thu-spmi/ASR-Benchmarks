@@ -13,7 +13,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 ## Nomenclature
 | Terms | Explanations |
 | -- |-- |
-|**Unit**| phone (namely monophone), biphone, triphone, **wp** (word-piece), character, **BPE** (byte-pair encoding) |
+|**Unit**| phone (namely monophone), biphone, triphone, **wp** (word-piece), character, chenone, **BPE** (byte-pair encoding) |
 |**AM** | Acoustic Model. Note that: we also list the end-to-end (**e2e**) models (e.g., Attention based Seq2Seq, RNN-T) in this field, although those e2e models contains an implicit/internal LM through the encoder. |
 |**AM size (M)** | The number of parameters in millions in the Acoustic Model. Also we report the total number of parameters in the e2e models in this field. |
 |**LM**| Language Model, explicitly used, word-level (by default). ''---'' denotes not using shallow fusion with explicit/external LMs, particularly for Attention based Seq2Seq, RNN-T. |
@@ -98,10 +98,20 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 | dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Data | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
 | 1.55          | 4.22          | 1.75           | 4.46          | triphone   | multistream CNN | ?            | self-attentive simple recurrent unit (SRU) | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
-| ---           | ---           | 1.9            | 3.9          | wp  | Conformer       | 119          | LSTM                                      | ?           | SA        | ---       | [Conformer](#conformer)          |
+| 1.7 | 3.6 | 1.8 | 3.6 | wp | Conformer, wav2vec2.0 | 1017 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
+| ---           | ---           | 1.9            | 3.9          | wp  | Conformer       | 119          | LSTM                                      | ?           | SA        | Y      | [Conformer](#conformer)          |
 | ---           | ---           | 1.9            | 4.1           | wp  | ContextNet (L)  | 112.7       | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
+| --- | --- | 2.1 | 4.2 | wp | vggTransformer | 81 | Transformer | --- | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.1 | 4.3 | wp | Conformer | 119 | --- | --- | SA | Y | [Conformer](#conformer) |
+| --- | --- | 2.26 | 4.85 | chenone | Transformer | 90 | Transformer | ? | SP, SA | Y | [TransHybird](#transhybrid) |
+| 1.9 | 4.5 | 2.3 | 5.0 | triphone | BLSTM | ? | Transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
+| --- | --- | 2.31 | 4.79 | wp | vggTransformer | 81 | 4-gram | ? | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.6 | 5.59 | chenone | Transformer | 90 | 4-gram | ? | SP, SA | Y | [TransHybird](#transhybrid) |
+| 2.4 | 5.7 | 2.7 | 5.9 | wp | Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
+| 2.6 | 8.4 | 2.8 | 9.3 | wp | LSTM | ? | transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
 | 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF, BLSTM  | 13               | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
 | ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI, TDNN    | ?               | 4-gram                                    | ?            | SP       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
+| 5.1 | 19.1 | 5.9 | 20.0 | biphone | TDNN-f | ? | 4-gram | ? | SP | Y | [Pkwrap](#pkwrap) |
 
 ## AISHELL-1
 
@@ -131,7 +141,7 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 ## References
 | Short-hands | Full references |
 | :--- | :--- |
-| Deformable TDNN<a name="deformable"></a> | Keyu An, Yi Zhang, Zhijian Ou. Deformable TDNN with adaptive receptive fields for speech recognition. arXiv:2104.14791 |
+| Deformable TDNN<a name="deformable"></a> | Keyu An, Yi Zhang, Zhijian Ou. Deformable TDNN with adaptive receptive fields for speech recognition. Interspeech 2021. |
 | CTC-CRF<a name="ctc-crf"></a> ICASSP2019 | H. Xiang, Z. Ou. CRF-based Single-stage Acoustic Modeling with CTC Topology. ICASSP 2019. |
 | CAT IS2020<a name="cat"></a> | K. An, H. Xiang, Z. Ou. CAT: A CTC-CRF based ASR Toolkit Bridging the Hybrid and the End-to-end Approaches towards Data Efficiency and Low Latency. INTERSPEECH 2020.|
 |NAS<a name="st-nas"></a> SLT2021 | H. Zheng, K. AN, Z. Ou. Efficient Neural Architecture Search for End-to-end Speech Recognition via Straight-Through Gradients. SLT 2021. |
@@ -152,5 +162,10 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | SpecAug<a name="SpecAug"></a> | D. S. Park, W. Chan, Y. Zhang, et al., SpecAugment: A simple data augmentation method for automatic speech recognition. Interspeech 2019. |
 | ESPnet-Transformer<a name="ESPnet-Transformer"></a> | S. Karita, N. Chen, and et al. A comparative study on transformer vs RNN in speech applications,” ASRU 2019.|
 | Baidu-ASRU2017<a name="Baidu-ASRU2017"></a> | E. Battenberg, J. Chen, R. Child, A. Coates, Y. Li, H. Liu, S. Satheesh, A. Sriram, and Z. Zhu. Exploring neural transducers for end-to-end speech recognition. ASRU 2017. |
-| Tencent-IS2018<a name="Tencent-IS2018"></a> | C. Weng, J. Cui, G. Wang, J. Wang, C. Yu, D. Su, and D. Yu. Improving attention based sequence-to-sequence models for end-to-end English conversational speech recognition. Interspeech 2018 |
+| Tencent-IS2018<a name="Tencent-IS2018"></a> | C. Weng, J. Cui, G. Wang, J. Wang, C. Yu, D. Su, and D. Yu. Improving attention based sequence-to-sequence models for end-to-end English conversational speech recognition. Interspeech 2018. |
 | phoneBPE-IS2020<a name="phoneBPE-IS2020"></a> | Weiran Wang, Guangsen Wang, Aadyot Bhatnagar, Yingbo Zhou, Caiming Xiong, and Richard Socher. An investigation of phone-based subword units for end-to-end speech recognition. Interspeech 2020. |
+| RWTH19ASR<a name="rwth19asr"></a> | C. Luscher, E. Beck, K. Irie, M. Kitza, W. Michel, A. Zeyer, ¨ R. Schluter, and H. Ney, “RWTH ASR systems for LibriSpeech: Hybrid vs attention-w/o data augmentation," Interspeech 2019. |
+| Pkwrap<a name='pkwrap'></a> | Srikanth Madikeri, Sibo Tong, Juan Zuluaga-Gomez, Apoorv Vyas, Petr Motlicek, and Hervé Bourlard, “Pkwrap: a pytorch package for LF-MMI training of acoustic models,” Interspeech 2020. |
+| ConformerCTC<a name='conformerctc'></a> | Edwin G Ng, Chung-Cheng Chiu, Yu Zhang, and William Chan. Pushing the limits of non-autoregressive speech recognition. Interspeech 2021. |
+| FB2020WPM<a name = 'fb2020wpm'></a> | F. Zhang, Y. Wang, X. Zhang, C. Liu, et al., “Fast, Simpler and More Accurate Hybrid ASR Systems Using Wordpieces,” InterSpeech, 2020. |
+| TransHybird<a name = 'transhybrid'></a> | Yongqiang Wang, Abdelrahman Mohamed, Duc Le, Chunxi Liu, Alex Xiao, Jay Mahadeokar, Hongzhao Huang, Andros Tjandra, Xiaohui Zhang, Frank Zhang, Christian Fuegen, Geoffrey Zweig, and Michael L. Seltzer, “Transformer based acoustic modeling for hybrid speech recognition,” ICASSP 2020. |
