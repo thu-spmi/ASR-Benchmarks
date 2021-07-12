@@ -63,6 +63,7 @@ Results are sorted by `Sum` WER.
 | 6.4  | 13.4 | 9.9      |char       | RNN-T, BLSTM-LSTM, ivector  | 57          |  LSTM        | 84          | SP, SA, etc. | Fisher transcripts | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 6.5 | 13.9 | 10.2    |phone   |  LF-MMI, TDNN-f        | ?           | Transformer | 25          | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
 | 6.8 | 14.1 | [10.5]    |wp 1k   |  ATT               | ?           | LSTM | ?         | SA           | Fisher transcripts | [SpecAug](#SpecAug) IS2019 |
+| 6.9 | 14.5 | 10.7 |phone | CTC-CRF     Conformer | 51.82 | Transformer | 25 | SP, SA | Fisher transcripts | [AdvancingCTC-CRF](#advancinngctc-crf) |
 | 7.9  | 15.7 | 11.8     | char      | RNN-T BLSTM-LSTM            | 57          | LSTM        | 5           | SP, SA, etc. | ---                | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 8.3  | 17.1 | [12.7]  | bi-phone  | LF-MMI, TDNN-LSTM    | ?             | LSTM        | ?           | SP           | Fisher transcripts | [LF-MMI](#lf-mmi) TASLP2018            |
 | 8.6  | 17.0 | 12.8    | phone  | LF-MMI, TDNN-f       | ?             | 4-gram      | ?           | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
@@ -97,21 +98,24 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 
 | dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Data | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | multistream CNN | ?            | self-attentive simple recurrent unit (SRU) | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
-| 1.7 | 3.6 | 1.8 | 3.6 | wp | Conformer, wav2vec2.0 | 1017 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
-| ---           | ---           | 1.9            | 3.9          | wp  | Conformer       | 119          | LSTM                                      | ?           | SA        | Y      | [Conformer](#conformer)          |
-| ---           | ---           | 1.9            | 4.1           | wp  | ContextNet (L)  | 112.7       | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
-| --- | --- | 2.1 | 4.2 | wp | vggTransformer | 81 | Transformer | --- | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.1 | 4.3 | wp | Conformer | 119 | --- | --- | SA | Y | [Conformer](#conformer) |
-| --- | --- | 2.26 | 4.85 | chenone | Transformer | 90 | Transformer | ? | SP, SA | Y | [TransHybird](#transhybrid) |
-| 1.9 | 4.5 | 2.3 | 5.0 | triphone | BLSTM | ? | Transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
+| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | ?            | self-attentive simple recurrent unit (SRU) | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
+| 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer, wav2vec2.0 | 1017 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
+| ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM                                      | ?           | SA        | Y      | [Conformer](#conformer)          |
+| ---           | ---           | 1.9            | 4.1           | wp  | RNN-T ContextNet (L) | 112.7       | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
+| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer | --- | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | Y | [Conformer](#conformer) |
+| --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer | 90 | Transformer | ? | SP, SA | Y | [TransHybrid](#transhybrid) |
+| 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
 | --- | --- | 2.31 | 4.79 | wp | vggTransformer | 81 | 4-gram | ? | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.6 | 5.59 | chenone | Transformer | 90 | 4-gram | ? | SP, SA | Y | [TransHybird](#transhybrid) |
+| --- | --- | 2.5 | 5.8 | wp | ATT | ? | RNN | ? | SA | Y | [SpecAug](#SpecAug) IS2019 |
+| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer | 338 | SA | Y | [AdvancingCTC-CRF](#advancinngctc-crf) |
+| --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | Y | [TransHybrid](#transhybrid) |
 | 2.4 | 5.7 | 2.7 | 5.9 | wp | Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
-| 2.6 | 8.4 | 2.8 | 9.3 | wp | LSTM | ? | transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
+| --- | --- | 2.8 | 6.8 | wp | ATT | ? | --- | ? | SA | N | [SpecAug](#SpecAug) IS2019 |
+| 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
 | 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF, BLSTM  | 13               | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
 | ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI, TDNN    | ?               | 4-gram                                    | ?            | SP       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
-| 5.1 | 19.1 | 5.9 | 20.0 | biphone | TDNN-f | ? | 4-gram | ? | SP | Y | [Pkwrap](#pkwrap) |
+| 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI, TDNN-f | ? | 4-gram | ? | SP | Y | [Pkwrap](#pkwrap) |
 
 ## AISHELL-1
 
@@ -168,4 +172,5 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | Pkwrap<a name='pkwrap'></a> | Srikanth Madikeri, Sibo Tong, Juan Zuluaga-Gomez, Apoorv Vyas, Petr Motlicek, and Hervé Bourlard, “Pkwrap: a pytorch package for LF-MMI training of acoustic models,” Interspeech 2020. |
 | ConformerCTC<a name='conformerctc'></a> | Edwin G Ng, Chung-Cheng Chiu, Yu Zhang, and William Chan. Pushing the limits of non-autoregressive speech recognition. Interspeech 2021. |
 | FB2020WPM<a name = 'fb2020wpm'></a> | F. Zhang, Y. Wang, X. Zhang, C. Liu, et al., “Fast, Simpler and More Accurate Hybrid ASR Systems Using Wordpieces,” InterSpeech, 2020. |
-| TransHybird<a name = 'transhybrid'></a> | Yongqiang Wang, Abdelrahman Mohamed, Duc Le, Chunxi Liu, Alex Xiao, Jay Mahadeokar, Hongzhao Huang, Andros Tjandra, Xiaohui Zhang, Frank Zhang, Christian Fuegen, Geoffrey Zweig, and Michael L. Seltzer, “Transformer based acoustic modeling for hybrid speech recognition,” ICASSP 2020. |
+| TransHybrid<a name = 'transhybrid'></a> | Yongqiang Wang, Abdelrahman Mohamed, Duc Le, Chunxi Liu, Alex Xiao, Jay Mahadeokar, Hongzhao Huang, Andros Tjandra, Xiaohui Zhang, Frank Zhang, Christian Fuegen, Geoffrey Zweig, and Michael L. Seltzer, “Transformer based acoustic modeling for hybrid speech recognition,” ICASSP 2020. |
+| AdvancingCTC-CRF<a name='advancinngctc-crf'></a> | Huahuan Zheng, Wenjie Peng, Zhijian Ou and Jinsong Zhang, "Advancing CTC-CRF Based End-to-End Speech Recognition with Wordpieces and Conformers", arXiv:2107.03007. |
