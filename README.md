@@ -106,16 +106,16 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 | --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | Y | [Conformer](#conformer) |
 | --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer | 90 | Transformer | ? | SP, SA | Y | [TransHybrid](#transhybrid) |
 | 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 2.31 | 4.79 | wp | vggTransformer | 81 | 4-gram | ? | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.5 | 5.8 | wp | ATT | ? | RNN | ? | SA | Y | [SpecAug](#SpecAug) IS2019 |
+| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram | ? | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.5 | 5.8 | wp | ATT          CNN-BLSTM | ? | RNN | ? | SA | Y | [SpecAug](#SpecAug) IS2019 |
 | --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer | 338 | SA | Y | [AdvancingCTC-CRF](#advancinngctc-crf) |
 | --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | Y | [TransHybrid](#transhybrid) |
 | 2.4 | 5.7 | 2.7 | 5.9 | wp | Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
-| --- | --- | 2.8 | 6.8 | wp | ATT | ? | --- | ? | SA | N | [SpecAug](#SpecAug) IS2019 |
+| --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | N | [SpecAug](#SpecAug) IS2019 |
 | 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
-| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF, BLSTM  | 13               | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
-| ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI, TDNN    | ?               | 4-gram                                    | ?            | SP       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
-| 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI, TDNN-f | ? | 4-gram | ? | SP | Y | [Pkwrap](#pkwrap) |
+| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
+| ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
+| 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI  TDNN-f | ? | 4-gram | ? | SP | Y | [Pkwrap](#pkwrap) |
 
 ## AISHELL-1
 
