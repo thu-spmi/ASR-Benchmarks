@@ -10,21 +10,21 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 * [CHiME-4](#CHiME-4)
 * [References](#References)
 
-## Nomenclature
+## Nomenclature (alphabetical ordering)
 | Terms | Explanations |
 | -- |-- |
-|**ATT**| Attention based Seq2Seq, including **LAS** (Listen Attend and Spell). |
-|**NAS**| Neural Architecture Search|
-|**Unit**| phone (namely monophone), biphone, triphone, **wp** (word-piece), character, chenone, **BPE** (byte-pair encoding) |
 |**AM** | Acoustic Model. Options: DNN-HMM / CTC / ATT / ATT+CTC / RNN-T / CTC-CRF. Note that: we list some end-to-end (**e2e**) models (e.g., ATT, RNN-T) in this field, although those e2e models contains an implicit/internal LM through the encoder. |
 |**AM size (M)** | The number of parameters in millions in the Acoustic Model. Also we report the total number of parameters in e2e models in this field. |
-|**LM**| Language Model, explicitly used, word-level (by default). ''---'' denotes not using shallow fusion with explicit/external LMs, particularly for ATT, RNN-T. |
-|**LM size (M)** | The number of parameters in millions in the neural Language Model. For n-gram LMs, this field denotes the total number of n-gram features. |
+|**ATT**| Attention based Seq2Seq, including **LAS** (Listen Attend and Spell). |
+|**CER**| Character Error Rate |
 |**Data Aug.**| whether any forms of data augmentations are used, such as **SP** (3-fold Speech Perturbation from Kaldi), **SA** (SpecAugment) |
 |**Ext. Data**| whether any forms of external data (either speech data or text corpus) are used |
-|**WER**| Word Error Rate |
-|**CER**| Character Error Rate |
 |**L**| #Layer, e.g., L24 denotes that the number of layers is 24 |
+|**LM**| Language Model, explicitly used, word-level (by default). ''---'' denotes not using shallow fusion with explicit/external LMs, particularly for ATT, RNN-T. |
+|**LM size (M)** | The number of parameters in millions in the neural Language Model. For n-gram LMs, this field denotes the total number of n-gram features. |
+|**NAS**| Neural Architecture Search|
+|**Unit**| phone (namely monophone), biphone, triphone, **wp** (word-piece), character, chenone, **BPE** (byte-pair encoding) |
+|**WER**| Word Error Rate |
 | --- | not applied |
 | ? | not known from the original paper |
 
