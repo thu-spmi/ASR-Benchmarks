@@ -19,7 +19,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 |**LM**| Language Model, explicitly used, word-level (by default). ''---'' denotes not using shallow fusion with explicit/external LMs, particularly for Attention based Seq2Seq, RNN-T. |
 |**LM size (M)** | The number of parameters in millions in the neural Language Model. For n-gram LMs, this field denotes the total number of n-gram features. |
 |**Data Aug.**| whether any forms of data augmentations are used, such as **SP** (3-fold Speech Perturbation from Kaldi), **SA** (SpecAugment) |
-|**Ext. Data**| whether any forms of external data (either speech data or text corpus) are used |
+|**Ext. Data**| whether any forms of external data, such as speech data, text corpus, pretrained models, are used |
 |**ATT**| Attention based Seq2Seq|
 |**NAS**| Neural Architecture Search|
 |**WER**| Word Error Rate |
@@ -62,6 +62,7 @@ Results are sorted by `Sum` WER.
 | 6.4  | 13.4 | 9.9      |char       | RNN-T, BLSTM-LSTM, ivector  | 57          |  LSTM        | 84          | SP, SA, etc. | Fisher transcripts | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 6.5 | 13.9 | 10.2    |phone   |  LF-MMI, TDNN-f        | ?           | Transformer | 25          | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
 | 6.8 | 14.1 | [10.5]    |wp 1k   |  ATT               | ?           | LSTM | ?         | SA           | Fisher transcripts | [SpecAug](#SpecAug) IS2019 |
+| 6.9  | 14.5 | 10.7     | mono-phone| CTC-CRF, conformer    | 51.82         | Transformer      | 25        | SP, SA           | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf)                     |
 | 7.9  | 15.7 | 11.8     | char      | RNN-T BLSTM-LSTM            | 57          | LSTM        | 5           | SP, SA, etc. | ---                | [Advancing RNN-T](#arnn-t) ICASSP2021  |
 | 8.3  | 17.1 | [12.7]  | bi-phone  | LF-MMI, TDNN-LSTM    | ?             | LSTM        | ?           | SP           | Fisher transcripts | [LF-MMI](#lf-mmi) TASLP2018            |
 | 8.6  | 17.0 | 12.8    | phone  | LF-MMI, TDNN-f       | ?             | 4-gram      | ?           | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
@@ -85,7 +86,7 @@ Results are sorted by `Sum` WER.
 | 7.5  | 14.3 | [10.9] | 10.7 | bi-phone| LF-MMI, TDNN-LSTM    | ?            | LSTM | ?           | SP        | ---       | [LF-MMI](#lf-mmi) TASLP2018    |
 | 7.6  | 14.5 | [11.1] | 11.0 | bi-phone| EE-LF-MMI, TDNN-LSTM | ?            | LSTM | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
 | 7.3  | 15.0 | 11.2 |?    | mono-phone| CTC-CRF, VGG-BLSTM    | 39.2         | LSTM        | ?           | SP           | --- | [CAT](#cat) IS2020 |
-| 8.3  | 15.5 | [11.9] |?    | char | ATT  | ? | --- | ?           | SP           | --- | [Tencent-IS2018](#Tencent-IS2018) |
+| 8.3  | 15.5 | [11.9] |?    | char | ATT  | ? | --- | ---           | SP           | --- | [Tencent-IS2018](#Tencent-IS2018) |
 | 8.1  | 17.5 | [12.8] |?    | char | RNN-T | ?  | 4-gram | ? | SP           | --- | [Baidu-ASRU2017](#Baidu-ASRU2017) |
 
 ## Librispeech
@@ -108,10 +109,15 @@ AISHELL-ASR0009-OS1, is a  **178- hour** open source mandarin speech corpus. It 
 
 | test CER| Unit  | AM                            | AM size (M)      | LM                  | LM size (M) | Data Aug. | Ext. Data | Paper                 |
 | :------- | :---------------------------- | :---------- | :-------- | :------------------ | :---------- | --------- | --------- | --------------------- |
+| 4.18      | char| RNN-T+CTC, Conformer, LF-MMI | 89           | word 3-gram               | ?           | SA+SP     | ---       | [e2e-word-ngram](#e2e-word-ngram) |
 | 4.5      | char| ATT+CTC, Conformer | ?            | LSTM                | ?           | SA+SP     | ---       | [WNARS](#wnars)                 |
+| 4.6      | char| ATT+CTC, Transformer | Enc(94.4)+Dec(61.0)+CTC branch(3.3)=158.7            | ---                | ---           | SP     | wav2vec2.0, DistilGPT2       | [preformer-ASRU2021](#preformer-ASRU2021)                 |
+| 4.63     | char| ATT+CTC, Conformer | ?            | bidirectional attention rescoring | ?           | SA+SP     | ---       | [U2++](#U2++)                    |
+| 4.7     | char| ATT+CTC, Conformer | ?            | Transformer | ?           | SA+SP     | ---       |  [ESPnet-2](https://github.com/espnet/espnet/tree/master/egs2/aishell/asr1#conformer--specaug--speed-perturbation-featsraw-n_fft512-hop_length128) |
 | 4.72     | char| ATT+CTC, Conformer | ?            | attention rescoring | ?           | SA+SP     | ---       | [U2](#u2)                    |
-| 5.2   | char    | Comformer                     | ?           | ---                 | ?           | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
-| 6.34     | phone   | CTC-CRF, VGG-BLSTM            | 16           | 4-gram              | 0.7         | SP        | ---       | [CAT](#cat) IS2020            |
+| 4.8     | char| RNN-T+CTC, Conformer | 84.3            | --- | ---           | SA+SP     | ---       |  [ESPnet-1](https://github.com/espnet/espnet/blob/master/egs/aishell/asr1/RESULTS.md#conformer-transducer-with-auxiliary-task-ctc-weight--05) |
+| 5.2   | char    | Comformer                     | ?           | ---                 | ---           | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
+| 6.34     | phone   | CTC-CRF, VGG-BLSTM            | 16           | word 4-gram              | 0.7         | SP        | ---       | [CAT](#cat) IS2020            |
 
 
 ## CHiME-4
@@ -123,7 +129,7 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | dev simu WER | dev real WER | eval simu WER | eval real WER | Unit| AM                  | AM size (M)   | LM   | LM size (M) | Data Aug. | Ext. Data | Paper                       |
 | :----------- | :----------- | ------------- | ------------- | :------------------ | :---------- | :---- | :--- | :---------- | --------- | --------- | --------------------------- |
 | 1.15         | 1.50         | 1.45          | 1.99        | phone  | wide-residual BLSTM | ?            | LSTM | ?           | ---       | ---       | [Complex Spectral Mapping](#complex-spectral-mapping)    |
-| 1.78         | 1.69         | 2.12          | 2.24         | phone | 6 DCNN ensemble     | ?            | LSTM | ?           | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4)  system |
+| 1.78         | 1.69         | 2.12          | 2.24         | phone | 6 DCNN ensemble     | ?            | LSTM | ?           | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4) |
 | 2.10         | 1.90         | 2.66          | 2.74        | phone  | LF-MMI, TDNN | ?            | LSTM | ?           | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
 
 
@@ -152,3 +158,6 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | Baidu-ASRU2017<a name="Baidu-ASRU2017"></a> | E. Battenberg, J. Chen, R. Child, A. Coates, Y. Li, H. Liu, S. Satheesh, A. Sriram, and Z. Zhu. Exploring neural transducers for end-to-end speech recognition. ASRU 2017. |
 | Tencent-IS2018<a name="Tencent-IS2018"></a> | C. Weng, J. Cui, G. Wang, J. Wang, C. Yu, D. Su, and D. Yu. Improving attention based sequence-to-sequence models for end-to-end English conversational speech recognition. Interspeech 2018 |
 | phoneBPE-IS2020<a name="phoneBPE-IS2020"></a> | Weiran Wang, Guangsen Wang, Aadyot Bhatnagar, Yingbo Zhou, Caiming Xiong, and Richard Socher. An investigation of phone-based subword units for end-to-end speech recognition. Interspeech 2020. |
+| U2++<a name="U2++"></a> | Di Wu, Binbin Zhang, et al. U2++: Unified Two-pass Bidirectional End-to-end Model for Speech Recognition. arXiv:2106.05642. |
+| Advancing CTC-CRF<a name="advancing-ctc-crf"></a> | Huahuan Zheng*, Wenjie Peng*, Zhijian Ou, Jinsong Zhang. Advancing CTC-CRF Based End-to-End Speech Recognition with Wordpieces and Conformers. arXiv:2107.03007. |
+| e2e-word-ngram<a name="e2e-word-ngram"></a> | Jinchuan Tian, Jianwei Yu, et al. Improving Mandarin End-to-End Speech Recognition with Word N-gram Language Model. arXiv:2201.01995. |
