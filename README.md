@@ -65,6 +65,7 @@ Results are sorted by `Sum` WER.
 | 6.9 | 14.5 | 10.7 |phone | CTC-CRF     Conformer | 51.82 | Transformer | 25 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
 | 7.2 | 14.8 | 11.1 |wp | CTC-CRF  Conformer | 51.85 | Transformer | 25 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
 | 7.9  | 15.7 | 11.8     | char      | RNN-T BLSTM-LSTM            | 57          | LSTM        | 5           | SP, SA, etc. | ---                | [Advancing RNN-T](#arnn-t) ICASSP2021  |
+| 7.9 | 16.1 | 12.1 |phone | CTC-CRF     Conformer | 51.82 | 4-gram | 1.74 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
 | 8.3  | 17.1 | [12.7]  | bi-phone  | LF-MMI, TDNN-LSTM    | ?             | LSTM        | ?           | SP           | Fisher transcripts | [LF-MMI](#lf-mmi) TASLP2018            |
 | 8.6  | 17.0 | 12.8    | phone  | LF-MMI, TDNN-f       | ?             | 4-gram      | ?           | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
 | 8.5  | 17.4 | [13.0]   | bi-phone | EE-LF-MMI, TDNN-LSTM  | ?             | LSTM        | ?           | SP           | Fisher transcripts | [EE-LF-MMI](#lf-mmi) TASLP2018         |
