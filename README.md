@@ -18,7 +18,7 @@ An effort to track benchmarking results over widely-used datasets for ASR (Autom
 |**ATT**| Attention based Seq2Seq, including **LAS** (Listen Attend and Spell). |
 |**CER**| Character Error Rate |
 |**Data Aug.**| whether any forms of data augmentations are used, such as **SP** (3-fold Speech Perturbation from Kaldi), **SA** (SpecAugment) |
-|**Ext. Res.**| whether any forms of external resources, which are beyond of the original benchmarks, such as external speech data, text corpus, pretrained models, are used |
+|**Ext. Res.**| whether any forms of external resources beyond the standard datasets are used, such as external speech (more transcribed speech or unlabeled speech), external text corpus (outside of speech transcripts), pretrained models |
 |**L**| #Layer, e.g., L24 denotes that the number of layers is 24 |
 |**LM**| Language Model, explicitly used, word-level (by default). ''---'' denotes not using shallow fusion with explicit/external LMs, particularly for ATT, RNN-T. |
 |**LM size (M)** | The number of parameters in millions in the neural Language Model. For n-gram LMs, this field denotes the total number of n-gram features. |
@@ -94,36 +94,38 @@ Results are sorted by `Sum` WER.
 
 ## Librispeech
 
-The LibriSpeech corpus is derived from audiobooks that are part of the LibriVox project, and contains **1000 hours** of speech sampled at 16 kHz. The corpus is freely available for download, along with separately prepared language-model training data and pre-built language models.
+The LibriSpeech dataset is derived from audiobooks that are part of the LibriVox project, and contains **1000 hours** of speech sampled at 16 kHz. The dataset is freely available for [download](https://www.openslr.org/12/), along with [separately prepared LM training corpus and pre-built language models](https://www.openslr.org/11/).
 
 There are four test sets: dev-clean, dev-other, test-clean and test-other. For the sake of display, the results are sorted by `test-clean` WER.
 
+"addi. 800M words" means that an additonal 800M words (often called librispeech LM corpus) is used to train the LM, which is 80 times larger than the 10M words corresponding to the transcriptions of the 1000-hour labeled speech. 
+
 | dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Res. | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | ?            | self-attentive simple recurrent unit (SRU) | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
+| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | ?            | self-attentive simple recurrent unit (SRU) L24 | 139            | SA        | addi. 800M words       | [ASAPP-ASR](#asapp-asr)          |
 | 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer | 1017 | --- | --- | SA | wav2vec2.0 | [ConformerCTC](#conformerctc) |
-| ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM                                      | ?           | SA        | Y      | [Conformer](#conformer)          |
+| ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM                                      | ?           | SA        | addi. 800M words | [Conformer](#conformer)          |
 | ---           | ---           | 1.9            | 4.1           | wp  | RNN-T ContextNet (L) | 112.7       | LSTM                                      | ?           | SA        | ---       | [ContextNet](#contextnet)         |
-| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer | --- | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | Y | [Conformer](#conformer) |
-| --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer | 90 | Transformer | ? | SP, SA | Y | [TransHybrid](#transhybrid) |
-| 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram | ? | SP, SA | Y | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.5 | 5.8 | wp | ATT          CNN-BLSTM | ? | RNN | ? | SA | Y | [SpecAug](#SpecAug) IS2019 |
-| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer | 338 | SA | Y | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer | 338 | SA | Y | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | Y | [TransHybrid](#transhybrid) |
-| 2.4 | 5.7 | 2.7 | 5.9 | wp | Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
-| --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | N | [SpecAug](#SpecAug) IS2019 |
-| 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | Y | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 1.45 | SA | Y | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 1.45            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
-| ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | ---       | [LF-MMI Interspeech](#lf-mmi-is)|
-| 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI  TDNN-f | ? | 4-gram | ? | SP | Y | [Pkwrap](#pkwrap) |
+| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer | --- | SP, SA | addi. 800M words | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | --- | [Conformer](#conformer) |
+| --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer | 90 | Transformer | ? | SP, SA | addi. 800M words | [TransHybrid](#transhybrid) |
+| 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | addi. 800M words | [RWTH19ASR](#rwth19asr) |
+| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram | ? | SP, SA | addi. 800M words | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.5 | 5.8 | wp | ATT          CNN-BLSTM | ? | RNN | ? | SA | addi. 800M words | [SpecAug](#SpecAug) IS2019 |
+| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer | 338 | SA | addi. 800M words | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer | 338 | SA | addi. 800M words | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | addi. 800M words | [TransHybrid](#transhybrid) |
+| 2.4 | 5.7 | 2.7 | 5.9 | wp | CTC Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
+| --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
+| 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | addi. 800M words | [RWTH19ASR](#rwth19asr) |
+| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 1.45 | SA | addi. 800M words | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 1.45            | ---       | addi. 800M words       | [CTC-CRF](#ctc-crf) ICASSP2019|
+| ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | addi. 800M words      | [LF-MMI Interspeech](#lf-mmi-is)|
+| 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI  TDNN-f | ? | 4-gram | ? | SP | addi. 800M words | [Pkwrap](#pkwrap) |
 
 ## AISHELL-1
 
-AISHELL-ASR0009-OS1, is a  **178- hour** open source mandarin speech corpus. It is a part of AISHELL-ASR0009, which contains utterances from 11 domains, including smart home, autonomous driving, and industrial production. The whole recording was made in quiet indoor environment, using 3 different devices at the same time: high fidelity microphone (44.1kHz, 16-bit,); Android-system mobile phone (16kHz, 16-bit), iOS-system mobile phone (16kHz, 16-bit). Audios in high fidelity were re-sampled to 16kHz to build AISHELL- ASR0009-OS1. 400 speakers from different accent areas in China were invited to participate in the recording. The corpus is divided into training, development and testing sets.
+AISHELL-ASR0009-OS1, is a  **178- hour** open source mandarin speech dataset. It is a part of AISHELL-ASR0009, which contains utterances from 11 domains, including smart home, autonomous driving, and industrial production. The whole recording was made in quiet indoor environment, using 3 different devices at the same time: high fidelity microphone (44.1kHz, 16-bit,); Android-system mobile phone (16kHz, 16-bit), iOS-system mobile phone (16kHz, 16-bit). Audios in high fidelity were re-sampled to 16kHz to build AISHELL- ASR0009-OS1. 400 speakers from different accent areas in China were invited to participate in the recording. The corpus is divided into training, development and testing sets.
 
 | test CER| Unit  | AM                            | AM size (M)      | LM                  | LM size (M) | Data Aug. | Ext. Res. | Paper                 |
 | :------- | :---------------------------- | :---------- | :-------- | :------------------ | :---------- | --------- | --------- | --------------------- |
@@ -140,7 +142,7 @@ AISHELL-ASR0009-OS1, is a  **178- hour** open source mandarin speech corpus. It 
 
 ## CHiME-4
 
-The 4th CHiME challenge sets a target for distant-talking automatic speech recognition using a read speech corpus.  Two types of data are employed: 'Real data' - speech data that is recorded in real noisy environments (on a bus, cafe, pedestrian area, and street junction) uttered by actual talkers. 'Simulated data' - noisy utterances that have been generated by artificially mixing clean speech data with noisy backgrounds.
+The 4th CHiME challenge sets a target for distant-talking automatic speech recognition using a read speech dataset.  Two types of data are employed: 'Real data' - speech data that is recorded in real noisy environments (on a bus, cafe, pedestrian area, and street junction) uttered by actual talkers. 'Simulated data' - noisy utterances that have been generated by artificially mixing clean speech data with noisy backgrounds.
 
 There are four test sets. For the sake of display, the results are sorted by `eval real` WER.
 
