@@ -118,8 +118,8 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 | 2.4 | 5.7 | 2.7 | 5.9 | wp | CTC Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
 | --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
 | 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | addi. 800M words | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 1453 | SA | addi. 800M words | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 1453            | ---       | addi. 800M words       | [CTC-CRF](#ctc-crf) ICASSP2019|
+| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 145 | SA | addi. 800M words | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 145            | ---       | addi. 800M words       | [CTC-CRF](#ctc-crf) ICASSP2019|
 | ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | addi. 800M words      | [LF-MMI Interspeech](#lf-mmi-is)|
 | 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI  TDNN-f | ? | 4-gram | ? | SP | addi. 800M words | [Pkwrap](#pkwrap) |
 
