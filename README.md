@@ -39,15 +39,15 @@ Results are sorted by `eval92` WER.
 
 | eval92 WER | dev93 WER | Unit | AM | AM size (M) | LM | LM size (M) |Data Aug. | Ext. Res. | Paper |
 | --------- | -------- | - | - | ------- | ----------- | --- | ---- | ---- | ---- |
-| 2.50 | 5.48 | mono-phone | CTC-CRF, deformable TDNN | 11.9 | 4-gram | 2.59 |SP | --- | [Deformable TDNN](#deformable) |
+| 2.50 | 5.48 | mono-phone | CTC-CRF, deformable TDNN | 11.9 | 4-gram | 10.24 |SP | --- | [Deformable TDNN](#deformable) |
 | 2.7 | 5.3 | bi-phone | LF-MMI,  TDNN-LSTM | ? | 4-gram | ? |SP | --- | [LF-MMI](#lf-mmi) TASLP2018 |
-| 2.77       | 5.68      | mono-phone | CTC-CRF, TDNN NAS | 11.9        | 4-gram                                      | 2.59    | SP        | ---       | [NAS](#st-nas) SLT2021         |
+| 2.77       | 5.68      | mono-phone | CTC-CRF, TDNN NAS | 11.9        | 4-gram                                      | 10.24    | SP        | ---       | [NAS](#st-nas) SLT2021         |
 | 3.0        | 6.0      | bi-phone  | EE-LF-MMI, TDNN-LSTM | ?             | 4-gram                                      | ?           | SP        | ---       | [EE-LF-MMI](#lf-mmi) TASLP2018 |
-| 3.2        | 5.7      | mono-phone  | CTC-CRF, VGG-BLSTM | 16          | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020             |
+| 3.2        | 5.7      | mono-phone  | CTC-CRF, VGG-BLSTM | 16          | 4-gram                                      | 10.24    | SP        | ---       | [CAT](#cat) IS2020             |
 | 3.4        | 5.9       | sub-word| ATT, LSTM | 18            | RNN | 113        | ---       | ---       | [ESPRESSO](#espresso) ASRU2019 |
-| 3.79       | 6.23    | mono-phone  | CTC-CRF, BLSTM | 13.5         | 4-gram                                      | 2.59    | SP        | ---       | [CTC-CRF](#ctc-crf) ICASSP2019 |
+| 3.79       | 6.23    | mono-phone  | CTC-CRF, BLSTM | 13.5         | 4-gram                                      | 10.24    | SP        | ---       | [CTC-CRF](#ctc-crf) ICASSP2019 |
 | 4.9        | ---      | mono-char | ATT+CTC, Transformers | ?           | 4-gram                                      | ?    | SA        | ---       | [phoneBPE-IS2020](#phoneBPE-IS2020) |
-| 5.0        | 8.1      | mono-char | CTC-CRF, VGG-BLSTM | 16           | 4-gram                                      | 2.59    | SP        | ---       | [CAT](#cat) IS2020 |
+| 5.0        | 8.1      | mono-char | CTC-CRF, VGG-BLSTM | 16           | 4-gram                                      | 10.24    | SP        | ---       | [CAT](#cat) IS2020 |
 
 ## Swbd
 
@@ -66,15 +66,15 @@ Results are sorted by `Sum` WER.
 | 6.9 | 14.5 | 10.7 |phone | CTC-CRF     Conformer | 51.82 | Transformer | 25 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
 | 7.2 | 14.8 | 11.1 |wp | CTC-CRF  Conformer | 51.85 | Transformer | 25 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
 | 7.9  | 15.7 | 11.8     | char      | RNN-T BLSTM-LSTM            | 57          | LSTM        | 5           | SP, SA, etc. | ---                | [Advancing RNN-T](#arnn-t) ICASSP2021  |
-| 7.9 | 16.1 | 12.1 |phone | CTC-CRF     Conformer | 51.82 | 4-gram | 1.74 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
+| 7.9 | 16.1 | 12.1 |phone | CTC-CRF     Conformer | 51.82 | 4-gram | 4.71 | SP, SA | Fisher transcripts | [Advancing CTC-CRF](#advancing-ctc-crf) |
 | 8.3  | 17.1 | [12.7]  | bi-phone  | LF-MMI, TDNN-LSTM    | ?             | LSTM        | ?           | SP           | Fisher transcripts | [LF-MMI](#lf-mmi) TASLP2018            |
 | 8.6  | 17.0 | 12.8    | phone  | LF-MMI, TDNN-f       | ?             | 4-gram      | ?           | SP           | Fisher transcripts | [P-Rescoring](#p-rescoring) ICASSP2021 |
 | 8.5  | 17.4 | [13.0]   | bi-phone | EE-LF-MMI, TDNN-LSTM  | ?             | LSTM        | ?           | SP           | Fisher transcripts | [EE-LF-MMI](#lf-mmi) TASLP2018         |
 | 8.8  | 17.4 | 13.1    | mono-phone | CTC-CRF, VGG-BLSTM    | 39.2         | LSTM        | ?           | SP           | Fisher transcripts | [CAT](#cat) IS2020 |
 | 9.0  | 18.1 | [13.6] | BPE| ATT/CTC | ?  | Transformer | ?  | SP           | Fisher transcripts | [ESPnet-Transformer](#ESPnet-Transformer) ASRU2019 |
-| 9.7  | 18.4 | 14.1    | mono-phone | CTC-CRF, chunk-based VGG-BLSTM | 39.2         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
-| 9.8  | 18.8 | 14.3     | mono-phone| CTC-CRF, VGG-BLSTM    | 39.2         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
-| 10.3 | 19.3 | \[14.8\] | mono-phone| CTC-CRF, BLSTM        | 13.5         | 4-gram      | 1.74        | SP           | Fisher transcripts | [CTC-CRF](#ctc-crf) ICASSP2019         |
+| 9.7  | 18.4 | 14.1    | mono-phone | CTC-CRF, chunk-based VGG-BLSTM | 39.2         | 4-gram      | 4.71        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 9.8  | 18.8 | 14.3     | mono-phone| CTC-CRF, VGG-BLSTM    | 39.2         | 4-gram      | 4.71        | SP           | Fisher transcripts | [CAT](#cat) IS2020                     |
+| 10.3 | 19.3 | \[14.8\] | mono-phone| CTC-CRF, BLSTM        | 13.5         | 4-gram      | 4.71        | SP           | Fisher transcripts | [CTC-CRF](#ctc-crf) ICASSP2019         |
 
 ## FisherSwbd
 
