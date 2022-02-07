@@ -103,22 +103,21 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 | 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer | 1017 | --- | --- | SA | wav2vec2.0 | [ConformerCTC](#conformerctc) |
 | ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM only on transcripts                                      | ?           | SA        | --- | [Conformer](#conformer)          |
 | ---           | ---           | 1.9            | 4.1           | wp  | RNN-T ContextNet (L) | 112.7       | LSTM only on transcripts                                     | ?           | SA        | ---       | [ContextNet](#contextnet)         |
-| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer L42 [^1,2] | 338 | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer L42 [^1] [^3] | 338 | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
 | --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | --- | [Conformer](#conformer) |
 | --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer seq. disc. | 90 | Transformer | ? | SP, SA | --- | [TransHybrid](#transhybrid) |
 | 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | --- | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram [^3] | 145 | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram [^2] | 145 | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
 | --- | --- | 2.5 | 5.8 | wp | ATT          CNN-BLSTM | ? | RNN | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
-| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer L42 [^2] | 338 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer L42 [^2] | 338 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer L42 [^3] | 338 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer L42 [^3] | 338 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
 | --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | --- | [TransHybrid](#transhybrid) |
 | 2.4 | 5.7 | 2.7 | 5.9 | wp | CTC Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
 | --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
 | 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | --- | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram [^3] | 145 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram [^3]                                    | 145            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
+| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram [^2] | 145 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram [^2]                                    | 145            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
 | ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | ---      | [LF-MMI Interspeech](#lf-mmi-is)|
-| 5.1 | 19.1 | 5.9 | 20.0 | biphone | LF-MMI  TDNN-f | ? | 4-gram | ? | SP | --- | [Pkwrap](#pkwrap) |
 
 ## AISHELL-1
 
@@ -149,9 +148,11 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | 1.78         | 1.69         | 2.12          | 2.24         | phone | 6 DCNN ensemble     | ?            | LSTM | ?           | ---       | ---       | [USTC-iFlytek CHiME4](#ustc-chime4) |
 | 2.10         | 1.90         | 2.66          | 2.74        | phone  | LF-MMI, TDNN | ?            | LSTM | ?           | ---       | ---       | [Kaldi-CHiME4](#kaldi-chime4)                |
 
-[^1]: from correspondence with the authors <br>
-[^2]: used the 42-layer transformer LM in [this paper](#Transformer-LM) for Librispeech.<br>
-[^3]: used the 4-gram LM provided along with the Libripseech dataset, available [here](https://www.openslr.org/11/) <br>
+[^1]: from correspondence with the authors
+
+[^2]: used the 4-gram LM provided along with the Libripseech dataset, available [here](https://www.openslr.org/11/)
+
+[^3]: used the 42-layer transformer LM in [this paper](#Transformer-LM) for Librispeech.
 
 ## References
 | Short-hands | Full references |
@@ -180,7 +181,6 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | Tencent-IS2018<a name="Tencent-IS2018"></a> | C. Weng, J. Cui, G. Wang, J. Wang, C. Yu, D. Su, and D. Yu. [Improving attention based sequence-to-sequence models for end-to-end English conversational speech recognition.](https://www.isca-speech.org/archive/pdfs/interspeech_2018/weng18_interspeech.pdf) Interspeech 2018. |
 | phoneBPE-IS2020<a name="phoneBPE-IS2020"></a> | Weiran Wang, Guangsen Wang, Aadyot Bhatnagar, Yingbo Zhou, Caiming Xiong, and Richard Socher. [An investigation of phone-based subword units for end-to-end speech recognition.](http://www.interspeech2020.org/uploadfile/pdf/Tue-1-8-3.pdf) Interspeech 2020. |
 | RWTH19ASR<a name="rwth19asr"></a> | C. Luscher, E. Beck, K. Irie, M. Kitza, W. Michel, A. Zeyer, R. Schluter, and H. Ney. [RWTH ASR systems for LibriSpeech: Hybrid vs attention-w/o data augmentation.](https://arxiv.org/abs/1905.03072) Interspeech 2019. |
-| Pkwrap<a name='pkwrap'></a> | Srikanth Madikeri, Sibo Tong, Juan Zuluaga-Gomez, Apoorv Vyas, Petr Motlicek, and Hervé Bourlard. [Pkwrap: a pytorch package for LF-MMI training of acoustic models.](https://arxiv.org/abs/2010.03466) Interspeech 2020. |
 | ConformerCTC<a name='conformerctc'></a> | Edwin G Ng, Chung-Cheng Chiu, Yu Zhang, and William Chan. [Pushing the limits of non-autoregressive speech recognition.](https://arxiv.org/abs/2104.03416) Interspeech 2021. |
 | FB2020WPM<a name = 'fb2020wpm'></a> | F. Zhang, Y. Wang, X. Zhang, C. Liu, et al. [Fast, Simpler and More Accurate Hybrid ASR Systems Using Wordpieces.](http://www.interspeech2020.org/uploadfile/pdf/Mon-2-11-3.pdf) InterSpeech, 2020. |
 | TransHybrid<a name = 'transhybrid'></a> | Yongqiang Wang, Abdelrahman Mohamed, Duc Le, Chunxi Liu, Alex Xiao, Jay Mahadeokar, Hongzhao Huang, Andros Tjandra, Xiaohui Zhang, Frank Zhang, Christian Fuegen, Geoffrey Zweig, and Michael L. Seltzer. [Transformer based acoustic modeling for hybrid speech recognition.](https://arxiv.org/abs/1910.09799) ICASSP 2020. |
