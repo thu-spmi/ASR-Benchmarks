@@ -99,24 +99,26 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 
 | dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Res. | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | ?            | self-attentive simple recurrent unit (SRU) L24 | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
-| 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer | 1017 | --- | --- | SA | wav2vec2.0 | [ConformerCTC](#conformerctc) |
-| ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM only on transcripts                                      | ?           | SA        | --- | [Conformer](#conformer)          |
+| 1.4 | 2.4 | 1.4 | 2.5 | wp | RNN-T Conformer, Pre-training + Self-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
+| 1.5 | 2.7 | 1.5 | 2.8 | wp | RNN-T Conformer, Pre-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
+| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | 20.6M [^1]            | self-attentive simple recurrent unit (SRU) L24 | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
+| 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer, wav2vec2.0 | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [ConformerCTC](#conformerctc) |
+| ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM only on transcripts                                      | ~100M [^1]           | SA        | --- | [Conformer](#conformer)          |
 | ---           | ---           | 1.9            | 4.1           | wp  | RNN-T ContextNet (L) | 112.7       | LSTM only on transcripts                                     | ?           | SA        | ---       | [ContextNet](#contextnet)         |
-| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer L42 [^1] [^3] | 338 | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer L42 | 338 [^1] [^3] | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
 | --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | --- | [Conformer](#conformer) |
 | --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer seq. disc. | 90 | Transformer | ? | SP, SA | --- | [TransHybrid](#transhybrid) |
 | 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | --- | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram [^2] | 145 | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
+| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram | 145 [^2] | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
 | --- | --- | 2.5 | 5.8 | wp | ATT          CNN-BLSTM | ? | RNN | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
-| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer L42 [^3] | 338 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer L42 [^3] | 338 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer L42 | 338 [^3] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer L42 | 338 [^3] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
 | --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | --- | [TransHybrid](#transhybrid) |
 | 2.4 | 5.7 | 2.7 | 5.9 | wp | CTC Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
 | --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
 | 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | --- | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram [^2] | 145 | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram [^2]                                    | 145            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
+| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 145 [^2] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 145 [^2]            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
 | ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | ---      | [LF-MMI Interspeech](#lf-mmi-is)|
 
 ## AISHELL-1
@@ -188,3 +190,4 @@ There are four test sets. For the sake of display, the results are sorted by `ev
 | Advancing CTC-CRF<a name="advancing-ctc-crf"></a> | Huahuan Zheng*, Wenjie Peng*, Zhijian Ou, Jinsong Zhang. [Advancing CTC-CRF Based End-to-End Speech Recognition with Wordpieces and Conformers.](https://arxiv.org/abs/2107.03007) arXiv:2107.03007. |
 | e2e-word-ngram<a name="e2e-word-ngram"></a> | Jinchuan Tian, Jianwei Yu, et al. [Improving Mandarin End-to-End Speech Recognition with Word N-gram Language Model.](https://arxiv.org/pdf/2201.01995.pdf) arXiv:2201.01995. |
 | Transformer-LM<a name="Transformer-LM"></a> | K. Irie, A. Zeyer, R. Schluter, and H. Ney. [Language Modeling with Deep Transformers.](https://arxiv.org/abs/1905.04226) Interspeech, 2019. |
+| w2v-BERT<a name="w2v-BERT"></a> | Yu-An Chung, Yu Zhang, Wei Han, Chung-Cheng Chiu, James Qin, Ruoming Pang, Yonghui Wu. [W2v-BERT: Combining Contrastive Learning and Masked Language Modeling for Self-Supervised Speech Pre-Training.](https://arxiv.org/abs/2108.06209) arXiv:2108.06209.|
