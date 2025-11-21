@@ -99,7 +99,7 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 
 | dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Res. | Paper              |
 | :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 1.4 | 2.4 | 1.4 | 2.5 | wp | RNN-T Conformer, Pre-training + Self-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
+| 1.4 | 2.4 | 1.4 | 2.5 | wp | RNN-T Conformer, Pre-training + Noisy Student Training Self-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
 | 1.5 | 2.7 | 1.5 | 2.8 | wp | RNN-T Conformer, Pre-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
 | 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | 20.6M [^1]            | self-attentive simple recurrent unit (SRU) L24 | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
 | 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer, wav2vec2.0 | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [ConformerCTC](#conformerctc) |
@@ -120,6 +120,23 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 | --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 145 [^2] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
 | 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 145 [^2]            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
 | ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | ---      | [LF-MMI Interspeech](#lf-mmi-is)|
+
+We separate LLM based ASR results into another table:
+- AM indicate the Speech Encoder, not including the Projector;
+- LM indicate the LLM;
+- Unless otherwise stated, only the Projector is trained, while the Speech Encoder and the LLM are fixed.
+
+| dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Res. | Paper              |
+| :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
+| ? | ? | 1.8 | 3.4 | wp | HuBert-xlarge + LS-960 Fine-tuning | 964M | Vicuna-7B | 7B | --- | --- | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+| ? | ? | 2.0 | 4.2 | wp | WavLM-large + LS-960 Fine-tuning | 316.62M | Vicuna-7B | 7B | --- | --- | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666), namely 1.96, 4.18 in Table 5 |
+| ? | ? | 2.58 | 6.47 | wp | Whisper-large | 634.86M | Vicuna-7B | 7B | --- | --- | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+| ? | ? | 2.72 | 6.79 | wp | Whisper-medium | 305.68M | Vicuna-7B | 7B | --- | --- | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+| ? | ? | 4.19 | 9.50 | wp | Whisper-small | 87.00M | Vicuna-7B | 7B | --- | --- | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+| ? | ? | 4.33 | 8.62 | wp | Whisper-large | 634.86M | TinyLlama-Chat | 1.1B | --- | --- | [SLAM-ASR Table 4](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+| ? | ? | 6.73 | 9.13 | wp | HuBert-xlarge | 964M | TinyLlama | 1.1B | ? | ? | [SpeechLLM-2B](https://huggingface.co/skit-ai/speechllm-2B) |
+| ? | ? | 11.51 | 16.68 | wp | WavLM-large | 316.62M | TinyLlama | 1.1B | ? | ? | [SpeechLLM-1.5B](https://huggingface.co/skit-ai/speechllm-1.5B) |
+
 
 ## AISHELL-1
 
