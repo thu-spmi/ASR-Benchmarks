@@ -134,6 +134,7 @@ We separate LLM based ASR results into another table:
 | ? | ? | 2.72 | 6.79 | wp | Whisper-medium | 305.68M | Vicuna-7B | 7B | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
 | ? | ? | 4.19 | 9.50 | wp | Whisper-small | 87.00M | Vicuna-7B | 7B | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
 | ? | ? | 4.33 | 8.62 | wp | Whisper-large | 634.86M | TinyLlama-Chat | 1.1B | [SLAM-ASR Table 4](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+| ? | ? | 5.01 | 8.67 | wp | Whisper-medium | 305.68M | TinyLlama-Chat | 1.1B | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
 | ? | ? | 5.94 | 11.5 | wp | Whisper-small | 87.00M | TinyLlama-Chat | 1.1B | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
 | ? | ? | 6.73 | 9.13 | wp | HuBert-xlarge | 964M | TinyLlama | 1.1B |  [SpeechLLM-2B](https://huggingface.co/skit-ai/speechllm-2B), train projector and LLM-LoRA |
 | ? | ? | 11.51 | 16.68 | wp | WavLM-large | 316.62M | TinyLlama | 1.1B | [SpeechLLM-1.5B](https://huggingface.co/skit-ai/speechllm-1.5B), train projector and LLM-LoRA |
