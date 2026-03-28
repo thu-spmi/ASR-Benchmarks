@@ -97,48 +97,58 @@ The LibriSpeech dataset is derived from audiobooks that are part of the LibriVox
 
 There are four test sets: dev-clean, dev-other, test-clean and test-other. For the sake of display, the results are sorted by `test-clean` WER.
 
-| dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Data Aug. | Ext. Res. | Paper              |
-| :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :---------- | --------- | --------- | ------------------ |
-| 1.4 | 2.4 | 1.4 | 2.5 | wp | RNN-T Conformer, Pre-training + Noisy Student Training Self-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
-| 1.5 | 2.7 | 1.5 | 2.8 | wp | RNN-T Conformer, Pre-training | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT) |
-| 1.55          | 4.22          | 1.75           | 4.46          | triphone   | LF-MMI multistream CNN | 20.6M [^1]            | self-attentive simple recurrent unit (SRU) L24 | 139            | SA        | ---       | [ASAPP-ASR](#asapp-asr)          |
-| 1.7 | 3.6 | 1.8 | 3.6 | wp | CTC Conformer, wav2vec2.0 | 1017 | --- | --- | SA | Libri-Light unlab-60k hours | [ConformerCTC](#conformerctc) |
-| ---           | ---           | 1.9            | 3.9          | wp  | RNN-T Conformer | 119          | LSTM only on transcripts                                      | ~100M [^1]           | SA        | --- | [Conformer](#conformer)          |
-| ---           | ---           | 1.9            | 4.1           | wp  | RNN-T ContextNet (L) | 112.7       | LSTM only on transcripts                                     | ?           | SA        | ---       | [ContextNet](#contextnet)         |
-| --- | --- | 2.1 | 4.2 | wp | CTC vggTransformer | 81 | Transformer L42 | 338 [^1] [^3] | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.1 | 4.3 | wp | RNN-T Conformer | 119 | --- | --- | SA | --- | [Conformer](#conformer) |
-| --- | --- | 2.26 | 4.85 | chenone | DNN-HMM Transformer seq. disc. | 90 | Transformer | ? | SP, SA | --- | [TransHybrid](#transhybrid) |
-| 1.9 | 4.5 | 2.3 | 5.0 | triphone | DNN-HMM BLSTM | ? | Transformer | ? | --- | --- | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 2.31 | 4.79 | wp | CTC vggTransformer | 81 | 4-gram | 145 [^2] | SP, SA | --- | [FB2020WPM](#fb2020wpm) |
-| --- | --- | 2.5 | 5.8 | wp | ATT          CNN-BLSTM | ? | RNN | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
-| --- | --- | 2.51 | 5.95 | phone | CTC-CRF Conformer | 51.82 | Transformer L42 | 338 [^3] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| --- | --- | 2.54 | 6.33 | wp | CTC-CRF Conformer | 51.85 | Transformer L42 | 338 [^3] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| --- | --- | 2.6 | 5.59 | chenone | DNN-HMM Transformer | 90 | 4-gram | ? | SP, SA | --- | [TransHybrid](#transhybrid) |
-| 2.4 | 5.7 | 2.7 | 5.9 | wp | CTC Conformer | 116 | --- | --- | SA | --- | [ConformerCTC](#conformerctc) |
-| --- | --- | 2.8 | 6.8 | wp | ATT          CNN-BLSTM | ? | --- | ? | SA | --- | [SpecAug](#SpecAug) IS2019 |
-| 2.6 | 8.4 | 2.8 | 9.3 | wp | DNN-HMM LSTM | ? | transformer | ? | --- | --- | [RWTH19ASR](#rwth19asr) |
-| --- | --- | 3.61 | 8.10 | phone | CTC-CRF Conformer | 51.82 | 4-gram | 145 [^2] | SA | --- | [Advancing CTC-CRF](#advancinng-ctc-crf) |
-| 3.87          | 10.28         | 4.09           | 10.65         | phone  | CTC-CRF BLSTM  | 13               | 4-gram                                    | 145 [^2]            | ---       | ---       | [CTC-CRF](#ctc-crf) ICASSP2019|
-| ---           | ---           | 4.28           | ---             | tri-phone| LF-MMI   TDNN | ?               | 4-gram                                    | ?            | SP       | ---      | [LF-MMI Interspeech](#lf-mmi-is)|
+| test clean WER | test other WER | Unit/AM/AM size (M)                                                          | LM/LM size (M)                                     | Data Aug./Ext. Res.            | Paper                                    |
+|:---------------:|:---------------:|------------------------------------------------------------------------------|----------------------------------------------------|--------------------------------|------------------------------------------|
+|            1.4 |            2.5 | wp/RNN-T Conformer, Pre-training + Noisy Student Training Self-training/1017 | ---/---                                            | SA/Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT)                    |
+|            1.5 |            2.8 | wp/RNN-T Conformer, Pre-training/1017                                        | ---/---                                            | SA/Libri-Light unlab-60k hours | [w2v-BERT](#w2v-BERT)                    |
+|           1.75 |           4.46 | triphone/LF-MMI multistream CNN/20.6M [^1]                                   | self-attentive simple recurrent unit (SRU) L24/139 | SA/---                         | [ASAPP-ASR](#asapp-asr)                  |
+|            1.8 |            3.6 | wp/CTC Conformer, wav2vec2.0/1017                                            | ---/---                                            | SA/Libri-Light unlab-60k hours | [ConformerCTC](#conformerctc)            |
+|            1.9 |            3.9 | wp/RNN-T Conformer/119                                                       | LSTM only on transcripts/~100M [^1]                | SA/---                         | [Conformer](#conformer)                  |
+|            1.9 |            4.1 | wp/RNN-T ContextNet (L)/112.7                                                | LSTM only on transcripts/?                         | SA/---                         | [ContextNet](#contextnet)                |
+|            2.1 |            4.2 | wp/CTC vggTransformer/81                                                     | Transformer L42/338 [^1] [^3]                      | SP, SA/---                     | [FB2020WPM](#fb2020wpm)                  |
+|            2.1 |            4.3 | wp/RNN-T Conformer/119                                                       | ---/---                                            | SA/---                         | [Conformer](#conformer)                  |
+|           2.26 |           4.85 | chenone/DNN-HMM Transformer seq. disc./90                                    | Transformer/?                                      | SP, SA/---                     | [TransHybrid](#transhybrid)              |
+|            2.3 |            5.0 | triphone/DNN-HMM BLSTM/?                                                     | Transformer/?                                      | ---/---                        | [RWTH19ASR](#rwth19asr)                  |
+|           2.31 |           4.79 | wp/CTC vggTransformer/81                                                     | 4-gram/145 [^2]                                    | SP, SA/---                     | [FB2020WPM](#fb2020wpm)                  |
+|            2.5 |            5.8 | wp/ATT CNN-BLSTM/?                                                           | RNN/?                                              | SA/---                         | [SpecAug](#SpecAug) IS2019               |
+|           2.51 |           5.95 | phone/CTC-CRF Conformer/51.82                                                | Transformer L42/338 [^3]                           | SA/---                         | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+|           2.54 |           6.33 | wp/CTC-CRF Conformer/51.85                                                   | Transformer L42/338 [^3]                           | SA/---                         | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+|            2.6 |           5.59 | chenone/DNN-HMM Transformer/90                                               | 4-gram/?                                           | SP, SA/---                     | [TransHybrid](#transhybrid)              |
+|            2.7 |            5.9 | wp/CTC Conformer/116                                                         | ---/---                                            | SA/---                         | [ConformerCTC](#conformerctc)            |
+|            2.8 |            6.8 | wp/ATT CNN-BLSTM/?                                                           | ---/?                                              | SA/---                         | [SpecAug](#SpecAug) IS2019               |
+|            2.8 |            9.3 | wp/DNN-HMM LSTM/?                                                            | transformer/?                                      | ---/---                        | [RWTH19ASR](#rwth19asr)                  |
+|           3.61 |           8.10 | phone/CTC-CRF Conformer/51.82                                                | 4-gram/145 [^2]                                    | SA/---                         | [Advancing CTC-CRF](#advancinng-ctc-crf) |
+|           4.09 |          10.65 | phone/CTC-CRF BLSTM/13                                                       | 4-gram/145 [^2]                                    | ---/---                        | [CTC-CRF](#ctc-crf) ICASSP2019           |
+|           4.28 |            --- | tri-phone/LF-MMI TDNN/?                                                      | 4-gram/?                                           | SP/---                         | [LF-MMI Interspeech](#lf-mmi-is)         |
 
+### LLM-ASR results
 We separate LLM based ASR results into another table:
 - AM indicate the Speech Encoder, not including the Projector;
 - LM indicate the LLM;
-- Unless otherwise stated, only the Projector is trained, while the Speech Encoder and the LLM are fixed.
+- Unless otherwise stated, only the Projector is trained, while the Speech Encoder and the LLM are frozen.
 
-| dev clean WER | dev other WER | test clean WER | test other WER | Unit       |AM              | AM size (M) |  LM                                        | LM size (M) | Paper              |
-| :------------ | :------------ | -------------- | -------------- | :-------------- | :---------- | :--------- | :---------------------------------------- | :----------  | ------------------ |
-| ? | ? | 1.8 | 3.4 | wp | HuBert-xlarge + LS-960 Fine-tuning | 964M | Vicuna-7B | 7B | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 2.0 | 4.2 | wp | WavLM-large + LS-960 Fine-tuning | 316.62M | Vicuna-7B | 7B | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666), namely 1.96, 4.18 in Table 5 |
-| ? | ? | 2.58 | 6.47 | wp | Whisper-large | 634.86M | Vicuna-7B | 7B | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 2.72 | 6.79 | wp | Whisper-medium | 305.68M | Vicuna-7B | 7B | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 4.19 | 9.50 | wp | Whisper-small | 87.00M | Vicuna-7B | 7B | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 4.33 | 8.62 | wp | Whisper-large | 634.86M | TinyLlama-Chat | 1.1B | [SLAM-ASR Table 4](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 5.01 | 8.67 | wp | Whisper-medium | 305.68M | TinyLlama-Chat | 1.1B | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 5.94 | 11.5 | wp | Whisper-small | 87.00M | TinyLlama-Chat | 1.1B | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
-| ? | ? | 6.73 | 9.13 | wp | HuBert-xlarge | 964M | TinyLlama | 1.1B |  [SpeechLLM-2B](https://huggingface.co/skit-ai/speechllm-2B), train projector and LLM-LoRA |
-| ? | ? | 11.51 | 16.68 | wp | WavLM-large | 316.62M | TinyLlama | 1.1B | [SpeechLLM-1.5B](https://huggingface.co/skit-ai/speechllm-1.5B), train projector and LLM-LoRA |
+| test clean WER | test other WER | Unit | AM                                 | AM size (M) | LM             | LM size (M) | Paper                                                                                                    |
+|----------------|----------------|:-----|:-----------------------------------|:-----------:|:---------------|:-----------:|----------------------------------------------------------------------------------------------------------|
+| 1.8            | 3.4            | wp   | HuBert-xlarge + LS-960 Fine-tuning |     964M    | Vicuna-7B      |      7B     | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 2.0            | 4.2            | wp   | WavLM-large + LS-960 Fine-tuning   |   316.62M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666), namely 1.96, 4.18 in Table 5 |
+| 2.58           | 6.47           | wp   | Whisper-large                      |   634.86M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 2.72           | 6.79           | wp   | Whisper-medium                     |   305.68M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 4.19           | 9.50           | wp   | Whisper-small                      |    87.00M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 4.33           | 8.62           | wp   | Whisper-large                      |   634.86M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 4](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 5.01           | 8.67           | wp   | Whisper-medium                     |   305.68M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 5.94           | 11.5           | wp   | Whisper-small                      |    87.00M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 6.73           | 9.13           | wp   | HuBert-xlarge                      |     964M    | TinyLlama      |     1.1B    | [SpeechLLM-2B](https://huggingface.co/skit-ai/speechllm-2B), train projector and LLM-LoRA                |
+| 11.51          | 16.68          | wp   | WavLM-large                        |   316.62M   | TinyLlama      |     1.1B    | [SpeechLLM-1.5B](https://huggingface.co/skit-ai/speechllm-1.5B), train projector and LLM-LoRA            |
 
+### Streaming results
+
+Latency = Chunk-size + Look-ahead
+
+| test clean WER | test other WER |  Latency (s) | AM Encoder     | Decoder /Decoder left context | Paper                                                                   |
+|----------------|----------------|---|:---------------|:--------|-------------------------------------------------------------------------|
+| 3.4            | 5.5            |  - | Conformer 110M | 92M     | [SpeechLLM-XL non-streaming baseline](https://arxiv.org/pdf/2410.03752) |
+| 2.7            | 6.7            | 1.28+0.24  | Emformer 107M  | 92M /5.12s (left 4 chunks)     | [SpeechLLM-XL](https://arxiv.org/pdf/2410.03752)                        |
+| 3.0            | 7.4            | 1.92+0.96  | 80M  | llama-2-7b-hf LoRA rank-16 /27.3M      | [ReaLLM](https://arxiv.org/pdf/2406.09569)                        |
 
 ## AISHELL-1
 
@@ -156,6 +166,23 @@ AISHELL-ASR0009-OS1, is a  **178- hour** open source mandarin speech dataset. It
 | 5.2   | char    | Comformer                     | ?           | ---                 | ---           | SA        | ---       | [intermediate CTC loss](#inter-ctc) |
 | 6.34     | phone   | CTC-CRF, VGG-BLSTM            | 16           | word 4-gram              | 0.7         | SP        | ---       | [CAT](#cat) IS2020            |
 
+
+### Streaming results
+
+The latency is defined as the chunk size plus the right context (if any). ∆ is the additional latency introduced by rescoring the first-pass hypotheses, which is typically less than 100ms for a utterance.
+
+
+|  CER | Latency (ms) | AM | LM | Method                |
+|:----:|:------------:|----|----|-----------------------|
+| 4.79 |   400+2+Δ   |    |    | CUSIDE+NNLM rescoring |
+| 5.47 |     400+2    |    |    | [CUSIDE](https://www.isca-archive.org/interspeech_2022/an22_interspeech.pdf)                |
+| 5.05 |    640+Δ    |    |    | U2++ w/ rescoring     |
+| 5.22 |    640+Δ    |    |    | WNARS w/ rescoring    |
+| 5.81 |      640     |    |    | U2++                  |
+|  6.6 |     1920     |    |    | MMA wide chunk        |
+|  6.8 |     1280     |    |    | HS-DACS Transformer   |
+| 7.39 |      600     |    |    | SCAMA                 |
+|  7.5 |      960     |    |    | MMA narrow chunk      |
 
 ## CHiME-4
 
