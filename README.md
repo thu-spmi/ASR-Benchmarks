@@ -121,34 +121,50 @@ There are four test sets: dev-clean, dev-other, test-clean and test-other. For t
 |           4.09 |          10.65 | phone/CTC-CRF BLSTM/13                                                       | 4-gram/145 [^2]                                    | ---/---                        | [CTC-CRF](#ctc-crf) ICASSP2019           |
 |           4.28 |            --- | tri-phone/LF-MMI TDNN/?                                                      | 4-gram/?                                           | SP/---                         | [LF-MMI Interspeech](#lf-mmi-is)         |
 
-### LLM-ASR results
-We separate LLM based ASR results into another table:
+### LLM-ASR results (Projector only trained)
+We separate LLM based ASR results into another table. 
+- Unless otherwise stated, only the **Projector** is trained, while the Speech Encoder and the LLM are frozen.
 - AM indicate the Speech Encoder, not including the Projector;
 - LM indicate the LLM;
-- Unless otherwise stated, only the Projector is trained, while the Speech Encoder and the LLM are frozen.
 
-| test clean WER | test other WER | Unit | AM                                 | AM size (M) | LM             | LM size (M) | Paper                                                                                                    |
-|----------------|----------------|:-----|:-----------------------------------|:-----------:|:---------------|:-----------:|----------------------------------------------------------------------------------------------------------|
-| 1.8            | 3.4            | wp   | HuBert-xlarge + LS-960 Fine-tuning |     964M    | Vicuna-7B      |      7B     | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 2.0            | 4.2            | wp   | WavLM-large + LS-960 Fine-tuning   |   316.62M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666), namely 1.96, 4.18 in Table 5 |
-| 2.58           | 6.47           | wp   | Whisper-large                      |   634.86M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 2.72           | 6.79           | wp   | Whisper-medium                     |   305.68M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 4.19           | 9.50           | wp   | Whisper-small                      |    87.00M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 4.33           | 8.62           | wp   | Whisper-large                      |   634.86M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 4](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 5.01           | 8.67           | wp   | Whisper-medium                     |   305.68M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 5.94           | 11.5           | wp   | Whisper-small                      |    87.00M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
-| 6.73           | 9.13           | wp   | HuBert-xlarge                      |     964M    | TinyLlama      |     1.1B    | [SpeechLLM-2B](https://huggingface.co/skit-ai/speechllm-2B), train projector and LLM-LoRA                |
-| 11.51          | 16.68          | wp   | WavLM-large                        |   316.62M   | TinyLlama      |     1.1B    | [SpeechLLM-1.5B](https://huggingface.co/skit-ai/speechllm-1.5B), train projector and LLM-LoRA            |
+| test clean WER | test other WER | AM                               | AM size (M) | LM             | LM size (M) | Paper                                                                                                    |
+|----------------|----------------|:---------------------------------|:-----------:|:---------------|:-----------:|----------------------------------------------------------------------------------------------------------|
+| 1.8            | 3.4            | HuBert-xlarge + LS-960 FT        |     964M    | Vicuna-7B      |      7B     | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 2.0            | 4.2            | WavLM-large + LS-960 FT          |   316.62M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 8](https://ojs.aaai.org/index.php/AAAI/article/view/34666), namely 1.96, 4.18 in Table 5 |
+| 2.58           | 6.47           | Whisper-large                    |   634.86M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 2.72           | 6.79           | Whisper-medium                   |   305.68M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 4.19           | 9.50           | Whisper-small                    |    87.00M   | Vicuna-7B      |      7B     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 4.33           | 8.62           | Whisper-large                    |   634.86M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 4](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 5.01           | 8.67           | Whisper-medium                   |   305.68M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 5.94           | 11.5           | Whisper-small                    |    87.00M   | TinyLlama-Chat |     1.1B    | [SLAM-ASR Table 2](https://ojs.aaai.org/index.php/AAAI/article/view/34666)                               |
+| 6.73           | 9.13           | HuBert-xlarge                    |     964M    | TinyLlama      |     1.1B    | [SpeechLLM-2B](https://huggingface.co/skit-ai/speechllm-2B), train projector and LLM-LoRA                |
+| 11.51          | 16.68          | WavLM-large                      |   316.62M   | TinyLlama      |     1.1B    | [SpeechLLM-1.5B](https://huggingface.co/skit-ai/speechllm-1.5B), train projector and LLM-LoRA            |
+
+### More LLM-ASR results
+
+- Learnable (bold text) 
+
+| test clean | test other | Method                                                                                    | Paper                                                                      |
+|:----------:|:----------:|:------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|
+|    2.28    |    5.20    | Whisper large-v2 (634.86M) + 80-query Q-Former（24.5M **connector**）+ Vicuna-13B         | [Q-Former Table 1](https://arxiv.org/pdf/2309.13963)                       |
+|     2.3    |     4.8    | NeMo Conformer encoder (110M) + **Adapter** + 2B Megatron LLM **Lora** + nucleus sampling | [SALM Table 1](https://arxiv.org/pdf/2310.09424)                           |
+|    2.10    |    4.26    | HuBERT Large (317M) **LS-960h FT** + **Projector** (18.88M) + Vicuna-7B                     | [SLAM-ASR Table 5](https://ojs.aaai.org/index.php/AAAI/article/view/34666) |
+|    2.29    |    5.67    | HuBERT-large frozen + **Adapter** + Vicuna-7B frozen (48M total learnable)                | [A Comprehensive..., Model S1](https://arxiv.org/pdf/2406.17272v1)         |
+|    1.78    |    3.62    | HuBERT-large **LoRA** + **Adapter** + Vicuna-7B **LoRA** (65M total learnable)            | [A Comprehensive..., Model S4](https://arxiv.org/pdf/2406.17272v1)         |
+|    1.85    |    3.77    | HuBERT-large **LoRA** + **Adapter** + Vicuna-7B **LoRA** (337M total learnable)           | [A Comprehensive..., Model S10](https://arxiv.org/pdf/2406.17272v1)        |
+|    2.65    |    5.03    | WavLM-large (316.62M) + **Projector** + Llama3.1-8B (the SLAM recipe)                     | [Measuring the Redundancy..., Table 1](https://arxiv.org/pdf/2603.05121)   |
+|    1.70    |    3.56    | WavLM-large (316.62M) + **Projector** + Qwen2.5-7B LoRA (the SLAM recipe)                 | [Measuring the Redundancy..., Table 1](https://arxiv.org/pdf/2603.05121)   |
+|    1.97    |    3.78    | WavLM-large (316.62M) **BPE-phoneme-100 FT** + **Projector** + Qwen3-8B-Base **Lora-1.4B**                | [Phoneme-informed projector](https://arxiv.org/pdf/2604.09332)             |
 
 ### Streaming results
 
-Latency = Chunk-size + Look-ahead
+Latency = Chunk-size of Encoder + Look-ahead of Encoder
 
-| test clean WER | test other WER |  Latency (s) | AM Encoder     | Decoder /Decoder left context | Paper                                                                   |
+| test clean WER | test other WER |  Latency (s) | AM Encoder     | LLM Decoder /Decoder left context | Paper                                                                   |
 |----------------|----------------|---|:---------------|:--------|-------------------------------------------------------------------------|
 | 3.4            | 5.5            |  - | Conformer 110M | 92M     | [SpeechLLM-XL non-streaming baseline](https://arxiv.org/pdf/2410.03752) |
 | 2.7            | 6.7            | 1.28+0.24  | Emformer 107M  | 92M /5.12s (left 4 chunks)     | [SpeechLLM-XL](https://arxiv.org/pdf/2410.03752)                        |
-| 3.0            | 7.4            | 1.92+0.96  | 80M  | llama-2-7b-hf LoRA rank-16 /27.3M      | [ReaLLM](https://arxiv.org/pdf/2406.09569)                        |
+| 3.0            | 7.4            | 1.92+0.96  | 80M  | llama-2-7b-hf LoRA rank-16 (27.3M)/1s      | [ReaLLM](https://arxiv.org/pdf/2406.09569)                        |
 
 ## AISHELL-1
 
