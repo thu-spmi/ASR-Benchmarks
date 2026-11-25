@@ -155,6 +155,7 @@ We separate LLM based ASR results into another table.
 |    2.65    |    5.03    | WavLM-large (316.62M) + **Projector** + Llama3.1-8B (the SLAM recipe)                     | [Measuring the Redundancy..., Table 1](https://arxiv.org/pdf/2603.05121)   |
 |    1.70    |    3.56    | WavLM-large (316.62M) + **Projector** + Qwen2.5-7B LoRA (the SLAM recipe)                 | [Measuring the Redundancy..., Table 1](https://arxiv.org/pdf/2603.05121)   |
 |    1.97    |    3.78    | WavLM-large (316.62M) **BPE-phoneme-100 FT** + **Projector** + Qwen3-8B-Base **Lora-1.4B**                | [Phoneme-informed projector](https://arxiv.org/pdf/2604.09332)             |
+|    1.40    |    2.60    | **AuT Audio Encoder + Qwen3-1.7B LLM** (2.04B total, full-model FT of Qwen3-ASR-1.7B, Whisper norm)       | [Oruk Fourier 2B](https://huggingface.co/oruk/oruk-fourier-2b)             |
 
 ### Streaming results
 
